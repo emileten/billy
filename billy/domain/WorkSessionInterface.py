@@ -77,3 +77,5 @@ class WorkSessionInterface(object):
         TypeError
             if `self` or `other` are not ended.
         """
+
+        raise NotImplementedError

@@ -45,3 +45,14 @@ def test_overlaps():
     s1 = WorkSessionSimple().end_session()
     s2 = WorkSessionSimple().end_session()
     assert not s1.overlaps(s2)
+
+def test_unequal():
+
+    o1 = WorkSessionSimple()
+    o2 = 'str'
+    assert o1!=o2
+    o1 = WorkSessionSimple()
+    o2 = WorkSessionSimple()
+    o1.end_session()
+    o2.end_session()
+    assert o1!=o2

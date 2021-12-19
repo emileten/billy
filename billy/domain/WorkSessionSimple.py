@@ -34,6 +34,7 @@ class WorkSessionSimple(WorkSessionInterface):
             raise TypeError("this work session is already ended")
         self.end_time = pdl.now()
 
+
     def overlaps(self, other: WorkSessionInterface) -> bool:
 
         if not (self.is_ended and other.is_ended):
@@ -48,3 +49,12 @@ class WorkSessionSimple(WorkSessionInterface):
             return False
         else:
             return True
+
+    def __eq__(self, obj: object):
+
+        if not isinstance(obj, WorkSessionInterface):
+            return False
+
+        x1, x2, y1, y2 = self.start_time, self.end_time, other.start_time, other.end_time
+
+        return x1==y1 and x2==y2
