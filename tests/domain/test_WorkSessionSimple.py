@@ -1,6 +1,6 @@
 import pendulum as pdl
 import pytest
-from src.billy.domain.WorkSessionSimple import WorkSessionSimple
+from src.freebilly.domain.WorkSessionSimple import WorkSessionSimple
 
 # TODO many tests here are contingent on machine execution time
 

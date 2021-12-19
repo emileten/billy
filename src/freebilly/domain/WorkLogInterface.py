@@ -1,4 +1,4 @@
-from src.billy.domain.WorkSessionInterface import WorkSessionInterface
+from src.freebilly.domain.WorkSessionInterface import WorkSessionInterface
 import pendulum as pdl
 
 
