@@ -2,7 +2,7 @@ from billy.domain.WorkLogInterface import WorkLogInterface
 from billy.domain.WorkSessionInterface import WorkSessionInterface
 import pendulum as pdl
 
-class WorkLogDict(WorkLogInterface):
+class WorkLogSet(WorkLogInterface):
 
     """
     implementation of WorkLogInterface using a Dict.
@@ -10,9 +10,9 @@ class WorkLogDict(WorkLogInterface):
 
     client: str
     project: str
-    sessions: dict
+    sessions: set
 
-    def __init__(self, client, project, sessions={}):
+    def __init__(self, client, project, sessions=set()):
         self.client = client
         self.project = project
         self.sessions = sessions
