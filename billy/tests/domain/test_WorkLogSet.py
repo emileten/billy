@@ -17,4 +17,7 @@ def test_has_session():
 
 def test_total_time():
 
-    raise NotImplementedError
+    myLog = WorkLogSet(client='A', project='1', set())
+    myLog.add_session(WorkSessionSimple().end_session())
+    myLog.add_session(WorkSessionSimple().end_session())
+    assert myLog.total_time()==0

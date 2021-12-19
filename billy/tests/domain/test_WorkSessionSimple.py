@@ -62,7 +62,5 @@ def test_unequal():
 
 def total_time():
 
-    o1 = WorkSessionSimple()
-    time.sleep(60)
-    o1.end_session()
-    assert o1.total_time()==1
+    o1 = WorkSessionSimple().end_session()
+    assert o1.total_time()==0
