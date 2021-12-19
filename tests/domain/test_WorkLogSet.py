@@ -1,5 +1,5 @@
-from billy.domain.WorkSessionSimple import WorkSessionSimple
-from billy.domain.WorkLogSet import WorkLogSet
+from src.billy.domain.WorkSessionSimple import WorkSessionSimple
+from src.billy.domain.WorkLogSet import WorkLogSet
 import pendulum as pdl
 
 def test_add_session():
