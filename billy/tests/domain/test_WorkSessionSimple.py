@@ -3,16 +3,15 @@ import pendulum as pdl
 import pytest
 from billy.domain.WorkSessionSimple import WorkSessionSimple
 
-#TODO many tests here are contingent on machine execution time
+# TODO many tests here are contingent on machine execution time
+
 
 def test_get_start_time():
     my_session = WorkSessionSimple()
     expected = pdl.now()
     actual = my_session.get_start_time()
     assert isinstance(actual, pdl.DateTime)
-    assert (
-        actual.diff(expected).in_minutes() == 0
-    )
+    assert actual.diff(expected).in_minutes() == 0
 
 
 def test_is_ended():
@@ -26,17 +25,14 @@ def test_get_end_time():
     expected = pdl.now()
     actual = my_session.get_end_time()
     assert isinstance(actual, pdl.DateTime)
-    assert (
-        actual.diff(expected).in_minutes() == 0
-    )
+    assert actual.diff(expected).in_minutes() == 0
 
 
 def test_end_session():
-    assert (
-        pdl.now().diff(WorkSessionSimple().end_session().end_time).in_minutes() == 0
-    )
+    assert pdl.now().diff(WorkSessionSimple().end_session().end_time).in_minutes() == 0
     with pytest.raises(TypeError):
         WorkSessionSimple().end_session().end_session()
+
 
 def test_overlaps():
 
@@ -49,18 +45,20 @@ def test_overlaps():
     s2 = WorkSessionSimple().end_session()
     assert not s1.overlaps(s2)
 
+
 def test_unequal():
 
     o1 = WorkSessionSimple()
-    o2 = 'str'
-    assert o1!=o2
+    o2 = "str"
+    assert o1 != o2
     o1 = WorkSessionSimple()
     o2 = WorkSessionSimple()
     o1.end_session()
     o2.end_session()
-    assert o1!=o2
+    assert o1 != o2
+
 
 def total_time():
 
     o1 = WorkSessionSimple().end_session()
-    assert o1.total_time()==0
+    assert o1.total_time() == 0

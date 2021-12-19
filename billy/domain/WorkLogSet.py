@@ -2,6 +2,7 @@ from billy.domain.WorkLogInterface import WorkLogInterface
 from billy.domain.WorkSessionInterface import WorkSessionInterface
 import pendulum as pdl
 
+
 class WorkLogSet(WorkLogInterface):
 
     """

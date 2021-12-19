@@ -84,7 +84,6 @@ class WorkSessionInterface(object):
 
         raise NotImplementedError
 
-
     def total_time(self) -> int:
 
         """

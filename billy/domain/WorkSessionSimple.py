@@ -34,18 +34,24 @@ class WorkSessionSimple(WorkSessionInterface):
             raise TypeError("this work session is already ended")
         self.end_time = pdl.now()
 
-
     def overlaps(self, other: WorkSessionInterface) -> bool:
 
         if not (self.is_ended and other.is_ended):
-            raise TypeError('both sessions should be ended to check if they overlap')
+            raise TypeError("both sessions should be ended to check if they overlap")
 
-        x1, x2, y1, y2 = self.start_time, self.end_time, other.start_time, other.end_time
+        x1, x2, y1, y2 = (
+            self.start_time,
+            self.end_time,
+            other.start_time,
+            other.end_time,
+        )
 
-        if (not((x1 >= y1 and x1 <= y2)) and
-                not ((x2 >= y1 and x2 <= y2)) and
-                not ((y1 >= x1 and y1 <= x2)) and
-                not ((y2 >= x1 and y2 <= x2))):
+        if (
+            not ((x1 >= y1 and x1 <= y2))
+            and not ((x2 >= y1 and x2 <= y2))
+            and not ((y1 >= x1 and y1 <= x2))
+            and not ((y2 >= x1 and y2 <= x2))
+        ):
             return False
         else:
             return True
@@ -57,11 +63,13 @@ class WorkSessionSimple(WorkSessionInterface):
 
         x1, x2, y1, y2 = self.start_time, self.end_time, obj.start_time, obj.end_time
 
-        return x1==y1 and x2==y2
+        return x1 == y1 and x2 == y2
 
     def total_time(self) -> int:
 
         if not self.is_ended():
-            raise TypeError('cannot calculate total time of a work session that is not ended')
+            raise TypeError(
+                "cannot calculate total time of a work session that is not ended"
+            )
 
         return self.end_time.diff(self.start_time).in_minutes()

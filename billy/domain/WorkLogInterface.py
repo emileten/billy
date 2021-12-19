@@ -2,11 +2,11 @@ from billy.domain.WorkSessionInterface import WorkSessionInterface
 import pendulum as pdl
 import typing
 
+
 class WorkLogInterface(object):
     """
     abstraction for a work log
     """
-
 
     def add_session(self, session: WorkSessionInterface) -> None:
 
@@ -15,7 +15,6 @@ class WorkLogInterface(object):
         """
 
         raise NotImplementedError
-
 
     def total_time(self, start_time: pdl.DateTime, end_time: pdl.DateTime) -> int:
 
