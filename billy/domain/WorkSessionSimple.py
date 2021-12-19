@@ -1,5 +1,5 @@
 from billy.domain.WorkSessionInterface import WorkSessionInterface
-import pendulum
+import pendulum as pdl
 
 
 class WorkSessionSimple(WorkSessionInterface):
@@ -10,10 +10,10 @@ class WorkSessionSimple(WorkSessionInterface):
 
     def __init__(self) -> None:
 
-        self.start_time = pendulum.now()
+        self.start_time = pdl.now()
         self.end_time = None
 
-    def get_start_time(self) -> pendulum.DateTime:
+    def get_start_time(self) -> pdl.DateTime:
 
         return self.start_time
 
@@ -21,7 +21,7 @@ class WorkSessionSimple(WorkSessionInterface):
 
         return self.end_time is None
 
-    def get_end_time(self) -> pendulum.DateTime:
+    def get_end_time(self) -> pdl.DateTime:
 
         if self.end_time is None:
             raise TypeError("session still ongoing")
@@ -32,4 +32,4 @@ class WorkSessionSimple(WorkSessionInterface):
 
         if self.end_time is not None:
             raise TypeError("this work session is already ended")
-        self.end_time = pendulum.now()
+        self.end_time = pdl.now()

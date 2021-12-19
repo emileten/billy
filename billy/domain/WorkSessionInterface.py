@@ -1,5 +1,5 @@
-import typing
-import pendulum
+from typing import Union
+import pendulum as pdl
 
 
 class WorkSessionInterface(object):
@@ -8,10 +8,10 @@ class WorkSessionInterface(object):
     abstraction for a work session
     """
 
-    start_time: pendulum.DateTime
-    end_time: Union[None, pendulum.DateTime]
+    start_time: pdl.DateTime
+    end_time: Union[None, pdl.DateTime]
 
-    def get_start_time(self) -> pendulum.DateTime:
+    def get_start_time(self) -> pdl.DateTime:
 
         """
         Returns
@@ -44,7 +44,7 @@ class WorkSessionInterface(object):
 
         raise NotImplementedError
 
-    def get_end_time(self) -> pendulum.DateTime:
+    def get_end_time(self) -> pdl.DateTime:
 
         """
         Raises
