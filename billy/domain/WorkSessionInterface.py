@@ -1,21 +1,38 @@
-import time
 import typing
-from typing import Union
-import pandas as pd
+import pendulum
 
-class WorkSessionInterface:
+
+class WorkSessionInterface(object):
 
     """
     abstraction for a work session
     """
 
+    start_time: pendulum.DateTime
+    end_time: Union[None, pendulum.DateTime]
+
+    def get_start_time(self) -> pendulum.DateTime:
+
+        """
+        Returns
+        -------
+        the start time of this work session
+        """
+
+        raise NotImplementedError
+
     def end_session(self) -> None:
 
         """
         ends this session by adding a field representing the end time.
-        """
-        pass
 
+        Raises
+        ------
+        TypeError
+            if this session was already ended
+        """
+
+        raise NotImplementedError
 
     def is_ended(self) -> bool:
 
@@ -24,3 +41,19 @@ class WorkSessionInterface:
         -------
         true if this session is done.
         """
+
+        raise NotImplementedError
+
+    def get_end_time(self) -> pendulum.DateTime:
+
+        """
+        Raises
+        ------
+        TypeError
+            if this session is not yet ended.
+        Returns
+        -------
+        the end time of this work session if it's ended.
+        """
+
+        raise NotImplementedError

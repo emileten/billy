@@ -1,29 +1,21 @@
+from billy.domain.WorkLogInterface import WorkLogInterface
 from billy.domain.WorkSessionInterface import WorkSessionInterface
-import pendulum
 
 
-class WorkLogInterface:
+class WorkLogDict(WorkLogInterface):
+
     """
-    abstraction for a work log
+    implementation of WorkLogInterface using a Dict.
     """
 
     def add_session(self, session: WorkSessionInterface):
 
-        """
-        adds a session to this work log.
-        """
-
-        pass
+        raise NotImplementedError
 
     def has_session(self, session: WorkSessionInterface):
 
-        """
-        check if a session belongs to this log
-        """
         raise NotImplementedError
 
     def total_time(self, start_time: pendulum.DateTime, end_time: pendulum.DateTime):
 
-        """
-        returns the total time spent working between specified moments in time.
-        """
+        raise NotImplementedError
