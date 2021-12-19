@@ -1,12 +1,21 @@
 from billy.domain.WorkLogInterface import WorkLogInterface
 from billy.domain.WorkSessionInterface import WorkSessionInterface
-
+import pendulum as pdl
 
 class WorkLogDict(WorkLogInterface):
 
     """
     implementation of WorkLogInterface using a Dict.
     """
+
+    client: str
+    project: str
+    sessions: dict
+
+    def __init__(self, client, project, sessions={}):
+        self.client = client
+        self.project = project
+        self.sessions = sessions
 
     def add_session(self, session: WorkSessionInterface):
 
@@ -16,6 +25,6 @@ class WorkLogDict(WorkLogInterface):
 
         raise NotImplementedError
 
-    def total_time(self, start_time: pendulum.DateTime, end_time: pendulum.DateTime):
+    def total_time(self, start_time: pdl.DateTime, end_time: pdl.DateTime):
 
         raise NotImplementedError

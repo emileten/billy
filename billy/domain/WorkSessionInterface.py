@@ -57,3 +57,23 @@ class WorkSessionInterface(object):
         """
 
         raise NotImplementedError
+
+    def overlaps(selfs, other: WorkSessionInterface) -> bool:
+
+        """
+        check whether this session overlaps with another in time. Both have to be
+        ended.
+
+        Parameters
+        ----------
+        other : WorkSessionInterface
+
+        Returns
+        -------
+        false if the time interval of `self` is entirely outside of the time interval of `other`.
+
+        Raises
+        ------
+        TypeError
+            if `self` or `other` are not ended.
+        """
