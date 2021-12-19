@@ -1,6 +1,9 @@
+import time
 import pendulum as pdl
 import pytest
 from billy.domain.WorkSessionSimple import WorkSessionSimple
+
+#TODO many tests here are contingent on machine execution time
 
 def test_get_start_time():
     my_session = WorkSessionSimple()
@@ -56,3 +59,10 @@ def test_unequal():
     o1.end_session()
     o2.end_session()
     assert o1!=o2
+
+def total_time():
+
+    o1 = WorkSessionSimple()
+    time.sleep(60)
+    o1.end_session()
+    assert o1.total_time()==1

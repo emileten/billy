@@ -16,7 +16,8 @@ class WorkSessionInterface(object):
         """
         Returns
         -------
-        the start time of this work session
+        pdl.DateTime
+            the start time of this work session
         """
 
         raise NotImplementedError
@@ -39,7 +40,8 @@ class WorkSessionInterface(object):
         """
         Returns
         -------
-        true if this session is done.
+        bool
+            true if this session is done.
         """
 
         raise NotImplementedError
@@ -53,12 +55,13 @@ class WorkSessionInterface(object):
             if this session is not yet ended.
         Returns
         -------
-        the end time of this work session if it's ended.
+        pdl.DateTime
+            the end time of this work session if it's ended.
         """
 
         raise NotImplementedError
 
-    def overlaps(selfs, other: WorkSessionInterface) -> bool:
+    def overlaps(self, other: WorkSessionInterface) -> bool:
 
         """
         check whether this session overlaps with another in time. Both have to be
@@ -70,7 +73,8 @@ class WorkSessionInterface(object):
 
         Returns
         -------
-        false if the time interval of `self` is entirely outside of the time interval of `other`.
+        bool
+            false if the time interval of `self` is entirely outside of the time interval of `other`.
 
         Raises
         ------
@@ -79,3 +83,17 @@ class WorkSessionInterface(object):
         """
 
         raise NotImplementedError
+
+
+    def total_time(self) -> int:
+
+        """
+        Returns
+        -------
+        int
+            total time spent working during this session in minutes if it's ended.
+        Raises
+        ------
+        TypeError
+            if this session is not ended
+        """

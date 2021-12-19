@@ -5,7 +5,7 @@ import pendulum as pdl
 class WorkLogSet(WorkLogInterface):
 
     """
-    implementation of WorkLogInterface using a Dict.
+    implementation of WorkLogInterface using a Set.
     """
 
     client: str
@@ -25,6 +25,10 @@ class WorkLogSet(WorkLogInterface):
 
         raise NotImplementedError
 
-    def total_time(self, start_time: pdl.DateTime, end_time: pdl.DateTime):
+    def total_time(self, start_time: pdl.DateTime, end_time: pdl.DateTime) -> int:
+
+        raise NotImplementedError
+
+    def __contains__(self, item: WorkSessionInterface) -> bool:
 
         raise NotImplementedError

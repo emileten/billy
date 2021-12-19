@@ -4,18 +4,17 @@ from billy.domain.WorkLogSet import WorkLogSet
 def test_add_session():
 
     mySession = WorkSessionSimple()
-    myLog = WorkLogSet(client='A', project='1')
+    myLog = WorkLogSet()
     myLog.add_session(mySession)
-    assert
+    assert mySession in myLog
 
 
 def test_has_session():
 
     mySession = WorkSessionSimple()
-    myLog = WorkLogSet(client='A', project='1', {'mySession' : mySession})
-    myLog.add_session(mySession)
-    assert
+    myLog = WorkLogSet(client='A', project='1', set([mySession]))
+    assert mySession in myLog
 
+def test_total_time():
 
-    def test_total_time():
-    assert False
+    raise NotImplementedError
