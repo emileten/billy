@@ -1,12 +1,14 @@
-from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
+import abc
 import pendulum as pdl
+from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
 
 
-class AbstractWorkLog(object):
+class AbstractWorkLog(abc.ABC):
     """
     abstraction for a work log
     """
 
+    @abc.abstractmethod
     def add_session(self, session: AbstractWorkSession) -> None:
 
         """
@@ -15,6 +17,7 @@ class AbstractWorkLog(object):
 
         raise NotImplementedError
 
+    @abc.abstractmethod
     def total_time(self, start_time: pdl.DateTime, end_time: pdl.DateTime) -> int:
 
         """
@@ -24,12 +27,13 @@ class AbstractWorkLog(object):
 
         raise NotImplementedError
 
-    def __contains__(self, item: AbstractWorkSession) -> bool:
+    @abc.abstractmethod
+    def has_session(self, session: AbstractWorkSession) -> bool:
 
         """
         Parameters
         ----------
-        item : AbstractWorkSession
+        session : AbstractWorkSession
 
         Returns
         -------

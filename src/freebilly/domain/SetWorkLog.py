@@ -13,16 +13,16 @@ class SetWorkLog(AbstractWorkLog):
     project: str
     sessions: set
 
-    def __init__(self, client, project, sessions=set()):
+    def __init__(self, client, project, sessions=set()) -> None:
         self.client = client
         self.project = project
         self.sessions = sessions
 
-    def add_session(self, session: AbstractWorkSession):
+    def add_session(self, session: AbstractWorkSession) -> None:
 
         self.sessions.add(session)
 
-    def has_session(self, session: AbstractWorkSession):
+    def has_session(self, session: AbstractWorkSession) -> bool:
 
         return session in self.sessions
 

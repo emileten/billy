@@ -1,9 +1,10 @@
 from __future__ import annotations
 from typing import Union
+import abc
 import pendulum as pdl
 
 
-class AbstractWorkSession(object):
+class AbstractWorkSession(abc.ABC):
 
     """
     abstraction for a work session
@@ -12,6 +13,7 @@ class AbstractWorkSession(object):
     start_time: pdl.DateTime
     end_time: Union[None, pdl.DateTime]
 
+    @abc.abstractmethod
     def get_start_time(self) -> pdl.DateTime:
 
         """
@@ -23,6 +25,7 @@ class AbstractWorkSession(object):
 
         raise NotImplementedError
 
+    @abc.abstractmethod
     def end_session(self) -> None:
 
         """
@@ -36,6 +39,7 @@ class AbstractWorkSession(object):
 
         raise NotImplementedError
 
+    @abc.abstractmethod
     def is_ended(self) -> bool:
 
         """
@@ -47,6 +51,7 @@ class AbstractWorkSession(object):
 
         raise NotImplementedError
 
+    @abc.abstractmethod
     def get_end_time(self) -> pdl.DateTime:
 
         """
@@ -62,6 +67,7 @@ class AbstractWorkSession(object):
 
         raise NotImplementedError
 
+    @abc.abstractmethod
     def overlaps(self, other: AbstractWorkSession) -> bool:
 
         """
@@ -85,6 +91,7 @@ class AbstractWorkSession(object):
 
         raise NotImplementedError
 
+    @abc.abstractmethod
     def total_time(self) -> int:
 
         """
