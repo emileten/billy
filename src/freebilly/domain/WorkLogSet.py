@@ -33,4 +33,3 @@ class WorkLogSet(AbstractWorkLog):
         for labor in self.sessions:
             if labor.start_time >= start_time and labor.end_time <= end_time:
                 total = total + labor.total_time()
-
