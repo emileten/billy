@@ -2,7 +2,7 @@ from src.freebilly.domain.WorkSessionInterface import WorkSessionInterface
 import pendulum as pdl
 
 
-class WorkLogInterface(object):
+class AbstractWorkLog(object):
     """
     abstraction for a work log
     """
