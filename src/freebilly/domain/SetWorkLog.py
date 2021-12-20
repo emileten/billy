@@ -3,7 +3,7 @@ from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
 import pendulum as pdl
 
 
-class WorkLogSet(AbstractWorkLog):
+class SetWorkLog(AbstractWorkLog):
 
     """
     implementation of AbstractWorkLog using a Set.
