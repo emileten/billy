@@ -1,4 +1,4 @@
-from src.freebilly.domain.WorkSessionInterface import WorkSessionInterface
+from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
 import pendulum as pdl
 
 
@@ -7,7 +7,7 @@ class AbstractWorkLog(object):
     abstraction for a work log
     """
 
-    def add_session(self, session: WorkSessionInterface) -> None:
+    def add_session(self, session: AbstractWorkSession) -> None:
 
         """
         adds a session to this work log.
@@ -24,12 +24,12 @@ class AbstractWorkLog(object):
 
         raise NotImplementedError
 
-    def __contains__(self, item: WorkSessionInterface) -> bool:
+    def __contains__(self, item: AbstractWorkSession) -> bool:
 
         """
         Parameters
         ----------
-        item : WorkSessionInterface
+        item : AbstractWorkSession
 
         Returns
         -------

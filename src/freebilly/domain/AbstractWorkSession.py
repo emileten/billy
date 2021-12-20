@@ -3,7 +3,7 @@ from typing import Union
 import pendulum as pdl
 
 
-class WorkSessionInterface(object):
+class AbstractWorkSession(object):
 
     """
     abstraction for a work session
@@ -62,7 +62,7 @@ class WorkSessionInterface(object):
 
         raise NotImplementedError
 
-    def overlaps(self, other: WorkSessionInterface) -> bool:
+    def overlaps(self, other: AbstractWorkSession) -> bool:
 
         """
         check whether this session overlaps with another in time. Both have to be
@@ -70,7 +70,7 @@ class WorkSessionInterface(object):
 
         Parameters
         ----------
-        other : WorkSessionInterface
+        other : AbstractWorkSession
 
         Returns
         -------

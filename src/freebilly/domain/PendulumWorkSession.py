@@ -1,11 +1,11 @@
-from src.freebilly.domain.WorkSessionInterface import WorkSessionInterface
+from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
 import pendulum as pdl
 
 
-class WorkSessionSimple(WorkSessionInterface):
+class PendulumWorkSession(AbstractWorkSession):
 
     """
-    simple implementation of a WorkSessionInterface
+    simple implementation of a AbstractWorkSession
     """
 
     def __init__(self) -> None:
@@ -34,7 +34,7 @@ class WorkSessionSimple(WorkSessionInterface):
             raise TypeError("this work session is already ended")
         self.end_time = pdl.now()
 
-    def overlaps(self, other: WorkSessionInterface) -> bool:
+    def overlaps(self, other: AbstractWorkSession) -> bool:
 
         if not (self.is_ended and other.is_ended):
             raise TypeError("both sessions should be ended to check if they overlap")
@@ -58,7 +58,7 @@ class WorkSessionSimple(WorkSessionInterface):
 
     def __eq__(self, obj: object):
 
-        if not isinstance(obj, WorkSessionInterface):
+        if not isinstance(obj, AbstractWorkSession):
             return False
 
         x1, x2, y1, y2 = self.start_time, self.end_time, obj.start_time, obj.end_time

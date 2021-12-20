@@ -1,5 +1,5 @@
 from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
-from src.freebilly.domain.WorkSessionInterface import WorkSessionInterface
+from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
 import pendulum as pdl
 
 
@@ -18,11 +18,11 @@ class WorkLogSet(AbstractWorkLog):
         self.project = project
         self.sessions = sessions
 
-    def add_session(self, session: WorkSessionInterface):
+    def add_session(self, session: AbstractWorkSession):
 
         self.sessions.add(session)
 
-    def has_session(self, session: WorkSessionInterface):
+    def has_session(self, session: AbstractWorkSession):
 
         return session in self.sessions
 
