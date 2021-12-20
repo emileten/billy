@@ -5,7 +5,7 @@ import pendulum as pdl
 class PendulumWorkSession(AbstractWorkSession):
 
     """
-    simple implementation of a AbstractWorkSession
+    Implementation of an AbstractWorkSession using pendulum.
     """
 
     def __init__(self) -> None:

@@ -1,5 +1,5 @@
 import abc
-import pendulum as pdl
+from typing import Any
 from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
 
 
@@ -18,7 +18,7 @@ class AbstractWorkLog(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def total_time(self, start_time: pdl.DateTime, end_time: pdl.DateTime) -> int:
+    def total_time(self, start_time: Any, end_time: Any) -> int:
 
         """
         returns the total time in minutes spent working between specified moments in the time

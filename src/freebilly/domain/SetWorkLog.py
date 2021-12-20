@@ -1,12 +1,12 @@
 from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
-from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
+from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
 import pendulum as pdl
 
 
 class SetWorkLog(AbstractWorkLog):
 
     """
-    implementation of AbstractWorkLog using a Set.
+    implementation of AbstractWorkLog using a Set and PendulumWorkSession
     """
 
     client: str
@@ -18,11 +18,11 @@ class SetWorkLog(AbstractWorkLog):
         self.project = project
         self.sessions = sessions
 
-    def add_session(self, session: AbstractWorkSession) -> None:
+    def add_session(self, session: PendulumWorkSession) -> None:
 
         self.sessions.add(session)
 
-    def has_session(self, session: AbstractWorkSession) -> bool:
+    def has_session(self, session: PendulumWorkSession) -> bool:
 
         return session in self.sessions
 

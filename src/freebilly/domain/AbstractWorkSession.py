@@ -1,7 +1,6 @@
 from __future__ import annotations
-from typing import Union
+from typing import Union, Any
 import abc
-import pendulum as pdl
 
 
 class AbstractWorkSession(abc.ABC):
@@ -10,16 +9,16 @@ class AbstractWorkSession(abc.ABC):
     abstraction for a work session
     """
 
-    start_time: pdl.DateTime
-    end_time: Union[None, pdl.DateTime]
+    start_time: Any
+    end_time: Union[None, Any]
 
     @abc.abstractmethod
-    def get_start_time(self) -> pdl.DateTime:
+    def get_start_time(self) -> Any:
 
         """
         Returns
         -------
-        pdl.DateTime
+        Any
             the start time of this work session
         """
 
@@ -52,7 +51,7 @@ class AbstractWorkSession(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_end_time(self) -> pdl.DateTime:
+    def get_end_time(self) -> Any:
 
         """
         Raises
@@ -61,7 +60,7 @@ class AbstractWorkSession(abc.ABC):
             if this session is not yet ended.
         Returns
         -------
-        pdl.DateTime
+        Any
             the end time of this work session if it's ended.
         """
 
