@@ -2,26 +2,27 @@ from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
 from src.freebilly.domain.SetWorkLog import SetWorkLog
 import pendulum as pdl
 
+
 def test_add_session():
 
-    mySession = PendulumWorkSession()
-    myLog = SetWorkLog(client="A", project="1")
-    myLog.add_session(mySession)
-    assert mySession in myLog
+    my_session = PendulumWorkSession()
+    my_log = SetWorkLog(client="A", project="1")
+    my_log.add_session(my_session)
+    assert my_session in my_log
 
 
 def test_has_session():
 
-    mySession = PendulumWorkSession()
-    myLog = SetWorkLog(client="A", project="1", sessions=set(mySession))
-    assert mySession in myLog
+    my_session = PendulumWorkSession()
+    my_log = SetWorkLog(client="A", project="1", sessions=set([my_session]))
+    assert my_session in my_log
 
 
 def test_total_time():
 
     start = pdl.now()
-    myLog = SetWorkLog(client="A", project="1", sessions=set())
-    myLog.add_session(PendulumWorkSession().end_session())
-    myLog.add_session(PendulumWorkSession().end_session())
+    my_log = SetWorkLog(client="A", project="1", sessions=set())
+    my_log.add_session(PendulumWorkSession().end_session())
+    my_log.add_session(PendulumWorkSession().end_session())
     end = pdl.now()
-    assert myLog.total_time(start, end) == 0
+    assert my_log.total_time(start, end) == 0

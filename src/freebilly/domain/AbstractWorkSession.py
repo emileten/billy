@@ -22,15 +22,19 @@ class AbstractWorkSession(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def end_session(self) -> None:
+    def end_session(self) -> AbstractWorkSession:
 
         """
-        ends this session by adding a field representing the end time.
-
+        ends this session by adding a field representing the end time and returns itself.
         Raises
         ------
         TypeError
             if this session was already ended
+
+        Returns
+        -------
+        AbstractWorkSession
+            self
         """
 
         raise NotImplementedError

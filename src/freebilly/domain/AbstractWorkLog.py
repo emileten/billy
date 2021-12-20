@@ -28,7 +28,7 @@ class AbstractWorkLog(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def has_session(self, session: AbstractWorkSession) -> bool:
+    def __contains__(self, session: AbstractWorkSession) -> bool:
 
         """
         Parameters

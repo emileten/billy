@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Union
 from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
 import pendulum as pdl
@@ -8,6 +9,7 @@ class PendulumWorkSession(AbstractWorkSession):
     """
     Implementation of an AbstractWorkSession using pendulum.
     """
+
     __start_time: pdl.DateTime
     __end_time: Union[None, pdl.DateTime]
 
@@ -24,18 +26,16 @@ class PendulumWorkSession(AbstractWorkSession):
 
         return self.__end_time
 
-
-    def end_session(self) -> None:
+    def end_session(self) -> PendulumWorkSession:
 
         if self.get_end_time() is not None:
             raise TypeError("this work session is already ended")
         self.__end_time = pdl.now()
-
+        return self
 
     def is_ended(self) -> bool:
 
         return self.get_end_time() is not None
-
 
     def overlaps(self, other: AbstractWorkSession) -> bool:
 
@@ -64,7 +64,12 @@ class PendulumWorkSession(AbstractWorkSession):
         if not isinstance(obj, PendulumWorkSession):
             return False
 
-        x1, x2, y1, y2 = self.get_start_time(), self.get_end_time(), obj.get_start_time(), obj.get_end_time()
+        x1, x2, y1, y2 = (
+            self.get_start_time(),
+            self.get_end_time(),
+            obj.get_start_time(),
+            obj.get_end_time(),
+        )
 
         return x1 == y1 and x2 == y2
 
@@ -76,3 +81,7 @@ class PendulumWorkSession(AbstractWorkSession):
             )
 
         return self.get_end_time().diff(self.get_start_time()).in_minutes()
+
+    def __hash__(self):
+
+        return hash(self.get_start_time())
