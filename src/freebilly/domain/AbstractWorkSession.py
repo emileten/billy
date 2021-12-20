@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Union, Any
+from typing import Any
 import abc
 
 
@@ -8,9 +8,6 @@ class AbstractWorkSession(abc.ABC):
     """
     abstraction for a work session
     """
-
-    start_time: Any
-    end_time: Union[None, Any]
 
     @abc.abstractmethod
     def get_start_time(self) -> Any:
@@ -54,14 +51,10 @@ class AbstractWorkSession(abc.ABC):
     def get_end_time(self) -> Any:
 
         """
-        Raises
-        ------
-        TypeError
-            if this session is not yet ended.
         Returns
         -------
         Any
-            the end time of this work session if it's ended.
+            the end time of this work session if it's ended, None otherwise.
         """
 
         raise NotImplementedError

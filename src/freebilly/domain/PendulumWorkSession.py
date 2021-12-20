@@ -1,3 +1,4 @@
+from typing import Union
 from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
 import pendulum as pdl
 
@@ -7,43 +8,45 @@ class PendulumWorkSession(AbstractWorkSession):
     """
     Implementation of an AbstractWorkSession using pendulum.
     """
+    __start_time: pdl.DateTime
+    __end_time: Union[None, pdl.DateTime]
 
     def __init__(self) -> None:
 
-        self.start_time = pdl.now()
-        self.end_time = None
+        self.__start_time = pdl.now()
+        self.__end_time = None
 
     def get_start_time(self) -> pdl.DateTime:
 
-        return self.start_time
-
-    def is_ended(self) -> bool:
-
-        return self.end_time is None
+        return self.__start_time
 
     def get_end_time(self) -> pdl.DateTime:
 
-        if self.end_time is None:
-            raise TypeError("session still ongoing")
-        else:
-            return "self.end_time"
+        return self.__end_time
+
 
     def end_session(self) -> None:
 
-        if self.end_time is not None:
+        if self.get_end_time() is not None:
             raise TypeError("this work session is already ended")
-        self.end_time = pdl.now()
+        self.__end_time = pdl.now()
+
+
+    def is_ended(self) -> bool:
+
+        return self.get_end_time() is not None
+
 
     def overlaps(self, other: AbstractWorkSession) -> bool:
 
-        if not (self.is_ended and other.is_ended):
+        if not (self.is_ended() and other.is_ended()):
             raise TypeError("both sessions should be ended to check if they overlap")
 
         x1, x2, y1, y2 = (
-            self.start_time,
-            self.end_time,
-            other.start_time,
-            other.end_time,
+            self.get_start_time(),
+            self.get_end_time(),
+            other.get_start_time(),
+            other.get_end_time(),
         )
 
         if (
@@ -58,10 +61,10 @@ class PendulumWorkSession(AbstractWorkSession):
 
     def __eq__(self, obj: object):
 
-        if not isinstance(obj, AbstractWorkSession):
+        if not isinstance(obj, PendulumWorkSession):
             return False
 
-        x1, x2, y1, y2 = self.start_time, self.end_time, obj.start_time, obj.end_time
+        x1, x2, y1, y2 = self.get_start_time(), self.get_end_time(), obj.get_start_time(), obj.get_end_time()
 
         return x1 == y1 and x2 == y2
 
@@ -72,4 +75,4 @@ class PendulumWorkSession(AbstractWorkSession):
                 "cannot calculate total time of a work session that is not ended"
             )
 
-        return self.end_time.diff(self.start_time).in_minutes()
+        return self.get_end_time().diff(self.get_start_time()).in_minutes()
