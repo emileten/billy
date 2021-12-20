@@ -13,6 +13,9 @@ class AbstractWorkLog(abc.ABC):
 
         """
         adds a session to this work log.
+        Parameters
+        ----------
+        session : AbstractWorkSession
         """
 
         raise NotImplementedError
@@ -23,6 +26,15 @@ class AbstractWorkLog(abc.ABC):
         """
         returns the total time in minutes spent working between specified moments in the time
         interval spanned by this work log.
+
+        Parameters
+        ----------
+        start_time
+        end_time
+
+        Returns
+        -------
+        int
         """
 
         raise NotImplementedError
@@ -37,7 +49,8 @@ class AbstractWorkLog(abc.ABC):
 
         Returns
         -------
-        true if this session is contained in this log as per the equality definition.
+        bool
+            true if this session is contained in this log as per the equality definition.
         """
 
         raise NotImplementedError
