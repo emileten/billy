@@ -47,10 +47,10 @@ class PendulumWorkSession(AbstractWorkSession):
         )
 
         if (
-            not ((x1 >= y1 and x1 <= y2))
-            and not ((x2 >= y1 and x2 <= y2))
-            and not ((y1 >= x1 and y1 <= x2))
-            and not ((y2 >= x1 and y2 <= x2))
+            not (y1 <= x1 <= y2)
+            and not (y1 <= x2 <= y2)
+            and not (x1 <= y1 <= x2)
+            and not (x1 <= y2 <= x2)
         ):
             return False
         else:
