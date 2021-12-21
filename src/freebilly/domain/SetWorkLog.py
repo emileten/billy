@@ -44,3 +44,11 @@ class SetWorkLog(AbstractWorkLog):
             ):
                 total = total + labor.total_time()
         return total
+
+    def get_client(self) -> str:
+
+        return self.__client
+
+    def get_project(self) -> str:
+
+        return self.__project

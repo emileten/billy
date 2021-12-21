@@ -66,9 +66,23 @@ class AbstractWorkLog(abc.ABC):
     @abc.abstractmethod
     def get_client(self) -> str:
 
-        return self.__client
+        """
+        Returns
+        -------
+        str
+            this work log's client
+        """
+
+        raise NotImplementedError
+
 
     @abc.abstractmethod
     def get_project(self) -> str:
+        """
+        Returns
+        -------
+        str
+            this work log's project
+        """
 
-        return self.__project
+        raise NotImplementedError
