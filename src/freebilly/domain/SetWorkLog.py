@@ -11,33 +11,33 @@ class SetWorkLog(AbstractWorkLog):
     @TODO this should work with any AbstractWorkSession. Not just with PendulumWorkSession. This probably requires a separate AbstractWorkTime class.
     """
 
-    client: str
-    project: str
-    sessions: Set[PendulumWorkSession]
+    __client: str
+    __project: str
+    __sessions: Set[PendulumWorkSession]
 
     def __init__(self, client, project, sessions=None) -> None:
-        self.client = client
-        self.project = project
+        self.__client = client
+        self.__project = project
         if sessions is None:
-            self.sessions = set()
+            self.__sessions = set()
         else:
-            self.sessions = sessions
+            self.__sessions = sessions
 
     def add_session(self, session: PendulumWorkSession) -> None:
 
         if not session.is_ended():
             raise ValueError("cannot record an ongoing work session")
-        self.sessions.add(session)
+        self.__sessions.add(session)
 
     def __contains__(self, session: PendulumWorkSession) -> bool:
 
-        return session in self.sessions
+        return session in self.__sessions
 
     def total_time(self, start_time: pdl.DateTime, end_time: pdl.DateTime) -> int:
 
         # filter sessions that have their start time after start_time AND end_time before end_time
         total = 0
-        for labor in self.sessions:
+        for labor in self.__sessions:
             if (
                 labor.get_start_time() >= start_time
                 and labor.get_end_time() <= end_time

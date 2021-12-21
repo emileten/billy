@@ -18,7 +18,7 @@ def test_add_session():
 def test_has_session():
 
     my_session = PendulumWorkSession()
-    my_log = SetWorkLog(client="A", project="1", sessions=set([my_session]))
+    my_log = SetWorkLog(client="A", project="1", sessions={my_session})
     assert my_session in my_log
 
 
@@ -30,3 +30,13 @@ def test_total_time():
     my_log.add_session(PendulumWorkSession().end_session())
     end = pdl.now()
     assert my_log.total_time(start, end) == 0
+
+def test_get_client():
+
+    my_log = SetWorkLog(client="A", project="1")
+    assert my_log.get_client() == "A"
+
+def test_get_project():
+
+    my_log = SetWorkLog(client="A", project="1")
+    assert my_log.get_project() == "1"

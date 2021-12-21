@@ -8,6 +8,9 @@ class AbstractWorkLog(abc.ABC):
     abstraction for a work log
     """
 
+    __client: str
+    __project: str
+
     @abc.abstractmethod
     def add_session(self, session: AbstractWorkSession) -> None:
 
@@ -59,3 +62,13 @@ class AbstractWorkLog(abc.ABC):
         """
 
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_client(self) -> str:
+
+        return self.__client
+
+    @abc.abstractmethod
+    def get_project(self) -> str:
+
+        return self.__project
