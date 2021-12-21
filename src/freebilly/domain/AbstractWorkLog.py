@@ -12,10 +12,15 @@ class AbstractWorkLog(abc.ABC):
     def add_session(self, session: AbstractWorkSession) -> None:
 
         """
-        adds a session to this work log.
+        adds an ended work session to this work log.
         Parameters
         ----------
         session : AbstractWorkSession
+
+        Raises
+        ------
+        ValueError
+            if session is not ended.
         """
 
         raise NotImplementedError

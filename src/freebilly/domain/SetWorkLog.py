@@ -25,6 +25,8 @@ class SetWorkLog(AbstractWorkLog):
 
     def add_session(self, session: PendulumWorkSession) -> None:
 
+        if not session.is_ended():
+            raise ValueError("cannot record an ongoing work session")
         self.sessions.add(session)
 
     def __contains__(self, session: PendulumWorkSession) -> bool:

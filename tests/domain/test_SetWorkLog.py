@@ -1,12 +1,16 @@
+import pytest
+import pendulum as pdl
 from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
 from src.freebilly.domain.SetWorkLog import SetWorkLog
-import pendulum as pdl
 
 
 def test_add_session():
 
     my_session = PendulumWorkSession()
     my_log = SetWorkLog(client="A", project="1")
+    with pytest.raises(ValueError):
+        my_log.add_session(my_session)
+    my_session.end_session()
     my_log.add_session(my_session)
     assert my_session in my_log
 
