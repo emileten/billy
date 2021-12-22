@@ -9,6 +9,40 @@ class AbstractWorkSession(abc.ABC):
     abstraction for a work session
     """
 
+    __start_time: Any
+    __end_time: Any
+
+    @abc.abstractmethod
+    def __init__(self, start_time: Any, end_time: Any) -> None:
+
+        """
+        Parameters
+        ----------
+        start_time: Any
+            if None, starts the session, otherwise stores the value provided.
+        end_time: Any
+            if None, assigns None to __end_time. Otherwise, if start_time is not None, stores the value provided,
+            but if start_time is None, throws an exception because ending before starting is weird.
+
+        Raises
+        ------
+        ValueError
+            if `start_time` is None and `end_time` isn't.
+        """
+
+        raise NotImplementedError
+
+
+    @abc.abstractmethod
+    def start_session(self) -> None:
+
+        """
+        starts this session.
+        """
+
+        raise NotImplementedError
+
+
     @abc.abstractmethod
     def get_start_time(self) -> Any:
 

@@ -8,7 +8,7 @@ class SetWorkLog(AbstractWorkLog):
 
     """
     implementation of AbstractWorkLog using a Set and PendulumWorkSession
-    @TODO this should work with any AbstractWorkSession. Not just with PendulumWorkSession. This probably requires a separate AbstractWorkTime class.
+    @TODO this is coupled to PendulumWorkSession. Can couple that to AbstractWorkSession instead ?
     """
 
     __client: str
@@ -52,3 +52,7 @@ class SetWorkLog(AbstractWorkLog):
     def get_project(self) -> str:
 
         return self.__project
+
+    def is_empty(self) -> bool:
+
+        return len(self.__sessions) == 0

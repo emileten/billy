@@ -3,6 +3,21 @@ import pytest
 from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
 
 # TODO many tests here are contingent on machine execution time
+# TODO fixtures will make this DRY
+
+def test_init_existing_session_with_start_and_end():
+    my_session = PendulumWorkSession(start_time=pdl.time(1), end_time=pdl.time(1,0))
+    expected_start, expected_end = pdl.time(1), pdl.time(1,0)
+    assert (my_session.get_start_time(), my_session.get_end_time()) == (expected_start, expected_end)
+
+def test_init_with_start_without_end():
+    my_session = PendulumWorkSession(start_time=pdl.time(1))
+    expected_start, expected_end = pdl.time(1), None
+    assert (my_session.get_start_time(), my_session.get_end_time()) == (expected_start, expected_end)
+
+def test_init_without_start_with_end():
+    with pytest.raises(ValueError):
+        PendulumWorkSession(end_time=pdl.time(1, 0))
 
 
 def test_get_start_time():

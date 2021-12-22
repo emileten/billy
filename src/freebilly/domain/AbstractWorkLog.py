@@ -75,7 +75,6 @@ class AbstractWorkLog(abc.ABC):
 
         raise NotImplementedError
 
-
     @abc.abstractmethod
     def get_project(self) -> str:
         """
@@ -83,6 +82,19 @@ class AbstractWorkLog(abc.ABC):
         -------
         str
             this work log's project
+        """
+
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def is_empty(self) -> bool:
+
+        """
+        Returns
+        -------
+        bool
+            True if this work log contains no work sessions.
+
         """
 
         raise NotImplementedError

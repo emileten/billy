@@ -3,7 +3,7 @@ from typing import Union
 from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
 import pendulum as pdl
 
-
+#TODO you can consider having a separate abstraction for the time. This would become TupleWorkSession. 
 class PendulumWorkSession(AbstractWorkSession):
 
     """
@@ -13,10 +13,21 @@ class PendulumWorkSession(AbstractWorkSession):
     __start_time: pdl.DateTime
     __end_time: Union[None, pdl.DateTime]
 
-    def __init__(self) -> None:
+    def __init__(self, start_time: Union[None, pdl.DateTime] = None, end_time: Union[None, pdl.DateTime] = None) -> None:
+
+        if start_time is not None:
+            self.__start_time = start_time
+            self.__end_time = end_time
+        else:
+            if end_time is not None:
+                raise ValueError('cannot instantiate a Work Session with an end time but without start time')
+            self.start_session()
+            self.__end_time = end_time
+
+    def start_session(self) -> None:
 
         self.__start_time = pdl.now()
-        self.__end_time = None
+
 
     def get_start_time(self) -> pdl.DateTime:
 
