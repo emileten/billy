@@ -18,6 +18,9 @@ def test_add_session():
 def test_has_session():
 
     my_session = PendulumWorkSession()
+    with pytest.raises(ValueError):
+        SetWorkLog(client="A", project="1", sessions={my_session})
+    my_session.end_session()
     my_log = SetWorkLog(client="A", project="1", sessions={my_session})
     assert my_session in my_log
 
@@ -40,3 +43,9 @@ def test_get_project():
 
     my_log = SetWorkLog(client="A", project="1")
     assert my_log.get_project() == "1"
+
+# def test_get_work_sessions():
+#
+#     my_session = PendulumWorkSession()
+#     my_log = SetWorkLog(client="A", project="1", sessions={my_session})
+#     assert my_session in my_log

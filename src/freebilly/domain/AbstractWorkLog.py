@@ -1,5 +1,5 @@
 import abc
-from typing import Any
+from typing import Any, Generator
 from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
 
 
@@ -98,3 +98,12 @@ class AbstractWorkLog(abc.ABC):
         """
 
         raise NotImplementedError
+
+    # @abc.abstractmethod
+    # def get_work_sessions(self) -> Generator[AbstractWorkSession, None, None]:
+    #
+    #     """
+    #     Yields
+    #     -------
+    #         AbstractWorkSession
+    #     """

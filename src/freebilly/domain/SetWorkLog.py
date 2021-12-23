@@ -1,4 +1,4 @@
-from typing import Set
+from typing import Set, Union
 from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
 from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
 import pendulum as pdl
@@ -15,13 +15,13 @@ class SetWorkLog(AbstractWorkLog):
     __project: str
     __sessions: Set[PendulumWorkSession]
 
-    def __init__(self, client, project, sessions=None) -> None:
+    def __init__(self, client: str, project: str, sessions : Union[None, Set[PendulumWorkSession]] = None) -> None:
         self.__client = client
         self.__project = project
-        if sessions is None:
-            self.__sessions = set()
-        else:
-            self.__sessions = sessions
+        self.__sessions = set()
+        if sessions is not None:
+            for work_session in sessions:
+                self.add_session(work_session)
 
     def add_session(self, session: PendulumWorkSession) -> None:
 
