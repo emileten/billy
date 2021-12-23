@@ -2,7 +2,8 @@ import pendulum as pdl
 import pytest
 from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
 
-# TODO many tests here are contingent on machine execution time
+# TODO many tests here are contingent on machine execution time. Since you added the possibility
+# of initiating with user supplied times you should be able to fix that.
 # TODO fixtures will make this DRY
 
 def test_init_existing_session_with_start_and_end():
@@ -69,6 +70,11 @@ def test_unequal():
     o2 = PendulumWorkSession().end_session()
     assert o1 != o2
 
+def test_equal():
+
+    my_session_1 = PendulumWorkSession(start_time=pdl.time(1), end_time=pdl.time(1,0))
+    my_session_2 = PendulumWorkSession(start_time=pdl.time(1), end_time=pdl.time(1,0))
+    assert my_session_1 == my_session_2
 
 def test_total_time():
 

@@ -3,7 +3,7 @@ from pathlib import Path
 import csv
 from src.freebilly.repository.AbstractRepository import AbstractRepository
 from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
-from src.freebilly.domain.SetWorkLog import SetWorkLog
+from src.freebilly.domain.OrderedSetWorkLog import SetWorkLog
 from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
 import pendulum as pdl  # TODO this is coupled with pendulum so Pendulum WorkSession...
 

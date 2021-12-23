@@ -1,10 +1,11 @@
-from typing import Set, Union
+from typing import Set, Union, Generator
+from ordered_set import OrderedSet
 from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
 from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
 import pendulum as pdl
 
 
-class SetWorkLog(AbstractWorkLog):
+class OrderedSetWorkLog(AbstractWorkLog):
 
     """
     implementation of AbstractWorkLog using a Set and PendulumWorkSession
@@ -13,12 +14,12 @@ class SetWorkLog(AbstractWorkLog):
 
     __client: str
     __project: str
-    __sessions: Set[PendulumWorkSession]
+    __sessions: OrderedSet[PendulumWorkSession]
 
-    def __init__(self, client: str, project: str, sessions : Union[None, Set[PendulumWorkSession]] = None) -> None:
+    def __init__(self, client: str, project: str, sessions : Union[None, OrderedSet[PendulumWorkSession]] = None) -> None:
         self.__client = client
         self.__project = project
-        self.__sessions = set()
+        self.__sessions = OrderedSet()
         if sessions is not None:
             for work_session in sessions:
                 self.add_session(work_session)
@@ -56,3 +57,8 @@ class SetWorkLog(AbstractWorkLog):
     def is_empty(self) -> bool:
 
         return len(self.__sessions) == 0
+
+    def get_work_sessions(self) -> Generator[PendulumWorkSession, None, None]:
+
+        for s in self.__sessions:
+            yield s

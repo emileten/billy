@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 from src.freebilly.repository.CsvRepository import CsvRepository
 from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
-from src.freebilly.domain.SetWorkLog import SetWorkLog
+from src.freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
 
 
 # TODO duplicate stuff, consider fixtures
@@ -22,7 +22,7 @@ def test_exists():
 def test_exists_push():
     with TemporaryDirectory() as fake_dir_path:
         repo = CsvRepository(Path(fake_dir_path))
-        empty_work_log = SetWorkLog(client='A', project='1')
+        empty_work_log = OrderedSetWorkLog(client='A', project='1')
         repo.push(empty_work_log)
         assert repo.exists('A', '1')
 
