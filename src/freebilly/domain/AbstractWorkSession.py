@@ -32,7 +32,6 @@ class AbstractWorkSession(abc.ABC):
 
         raise NotImplementedError
 
-
     @abc.abstractmethod
     def start_session(self) -> None:
 
@@ -41,7 +40,6 @@ class AbstractWorkSession(abc.ABC):
         """
 
         raise NotImplementedError
-
 
     @abc.abstractmethod
     def get_start_time(self) -> Any:

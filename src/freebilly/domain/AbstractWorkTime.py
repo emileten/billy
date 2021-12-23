@@ -33,7 +33,6 @@ class AbstractWorkTime(abc.ABC):
 
         raise NotImplementedError
 
-
     def diff(self, other: AbstractWorkTime) -> int:
 
         """
@@ -50,11 +49,9 @@ class AbstractWorkTime(abc.ABC):
 
         raise NotImplementedError
 
-
     def __lt__(self, other: AbstractWorkTime) -> bool:
 
         raise NotImplementedError
-
 
     def __gt__(self, other: AbstractWorkTime) -> bool:
 
