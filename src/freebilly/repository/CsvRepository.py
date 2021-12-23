@@ -3,7 +3,7 @@ from pathlib import Path
 import csv
 from src.freebilly.repository.AbstractRepository import AbstractRepository
 from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
-from src.freebilly.domain.OrderedSetWorkLog import SetWorkLog
+from src.freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
 from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
 import pendulum as pdl  # TODO this is coupled with pendulum so Pendulum WorkSession...
 
@@ -16,11 +16,11 @@ class CsvRepository(AbstractRepository):
     """
 
     __work_log_path: Path
-    __work_log_prefix: str = "work_log"
+    __work_log_prefix: str
     __work_log: Union[None, AbstractWorkLog]
-    __field_names: List = ["start_time", "end_time"]
+    __field_names: List
 
-    def __init__(self, path: Path) -> None:
+    def __init__(self, path: Path, prefix = "work_log", field_names = ["start_time", "end_time"] ) -> None:
 
         """
         Parameters
@@ -31,7 +31,9 @@ class CsvRepository(AbstractRepository):
         if not path.exists():
             raise ValueError("nonexistent path")
         self.__work_log_path = path
-        self._work_log = None
+        self.__work_log = None
+        self.__work_log_prefix = prefix
+        self.__field_names = field_names
 
     def push(self, work_log: AbstractWorkLog) -> None:
 
@@ -48,7 +50,7 @@ class CsvRepository(AbstractRepository):
                 fieldnames=self.__field_names,
             )
             work_log_writer.writeheader()
-            for work_session in work_log:
+            for work_session in work_log.get_work_sessions():
                 work_log_writer.writerow(
                     {
                         "start_time": work_session.get_start_time(),
@@ -67,9 +69,9 @@ class CsvRepository(AbstractRepository):
             raise ValueError(
                 f"file for client {client} and project {project} does not exist"
             )
-        new_work_log = SetWorkLog(
+        new_work_log = OrderedSetWorkLog(
             client, project
-        )  # TODO here is a coupling with SetWorkLog
+        )  # TODO here is a coupling with OrderedSetWorkLog
         with open(csv_file_path) as csv_file:
             for row in csv.DictReader(
                 csv_file,

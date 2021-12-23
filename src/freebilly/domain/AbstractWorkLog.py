@@ -101,7 +101,6 @@ class AbstractWorkLog(abc.ABC):
 
     @abc.abstractmethod
     def get_work_sessions(self) -> Generator[AbstractWorkSession, None, None]:
-
         """
         Yields
         -------
