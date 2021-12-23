@@ -1,11 +1,14 @@
 import os
+import csv
 from tempfile import TemporaryDirectory, NamedTemporaryFile
 from pathlib import Path
 import pytest
+import pendulum as pdl
+import ordered_set
 from src.freebilly.repository.CsvRepository import CsvRepository
 from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
 from src.freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
-
+from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
 
 # TODO duplicate stuff, consider fixtures
 
@@ -19,15 +22,22 @@ def test_exists():
         os.rename(str(Path().joinpath(temp_folder_path, 'work_log_A_1.csv')), temp_fp.name)  # finally, rename back
 
 
-def test_exists_push():
+def test_exists_push_empty():
     with TemporaryDirectory() as fake_dir_path:
         repo = CsvRepository(Path(fake_dir_path))
         empty_work_log = OrderedSetWorkLog(client='A', project='1')
         repo.push(empty_work_log)
         assert repo.exists('A', '1')
 
+def test_exists_push_non_empty():
+    with TemporaryDirectory() as fake_dir_path:
+        repo = CsvRepository(Path(fake_dir_path))
+        my_work_session = PendulumWorkSession(start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 2, 2))
+        non_empty_work_log = OrderedSetWorkLog(client='A', project='1', sessions=ordered_set.OrderedSet([my_work_session]))
+        repo.push(non_empty_work_log)
+        assert repo.exists('A', '1')
 
-def test_exists_get():
+def test_exists_get_empty():
     temp_folder_path = '/tmp'
     with NamedTemporaryFile(dir=temp_folder_path) as temp_fp:
         os.rename(temp_fp.name,
@@ -37,6 +47,33 @@ def test_exists_get():
         my_work_log = repo.get('A', '1')
         assert isinstance(my_work_log, AbstractWorkLog)
         assert my_work_log.is_empty()
+        os.rename(str(Path().joinpath(temp_folder_path, 'work_log_A_1.csv')), temp_fp.name)  # finally, rename back
+
+def test_exists_get_non_empty():
+    temp_folder_path = '/tmp'
+    my_work_session = PendulumWorkSession(start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 2, 2))
+    with NamedTemporaryFile(dir=temp_folder_path) as temp_fp:
+        os.rename(temp_fp.name,
+                  str(Path().joinpath(temp_folder_path, 'work_log_A_1.csv')))  # because no full name choice option
+        with open(
+            str(Path().joinpath(temp_folder_path, 'work_log_A_1.csv')), "w", newline="",
+        ) as csv_file:
+            my_writer = csv.DictWriter(
+                csv_file,
+                fieldnames=["start_time", "end_time"],
+            )
+            my_writer.writerow(
+                {
+                    "start_time": my_work_session.get_start_time().to_iso8601_string(),
+                    "end_time": my_work_session.get_end_time().to_iso8601_string(),
+                }
+            )
+
+        repo = CsvRepository(Path('/tmp'))
+        assert repo.exists('A', '1')
+        my_work_log = repo.get('A', '1')
+        assert isinstance(my_work_log, AbstractWorkLog)
+        assert my_work_session in my_work_log
         os.rename(str(Path().joinpath(temp_folder_path, 'work_log_A_1.csv')), temp_fp.name)  # finally, rename back
 
 

@@ -5,7 +5,7 @@ from src.freebilly.repository.AbstractRepository import AbstractRepository
 from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
 from src.freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
 from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
-import pendulum as pdl  # TODO this is coupled with pendulum so Pendulum WorkSession...
+import pendulum as pdl  # TODO this is coupled with pendulum so PendulumWorkSession...
 
 
 class CsvRepository(AbstractRepository):
@@ -44,17 +44,13 @@ class CsvRepository(AbstractRepository):
         ) as csv_file:
             work_log_writer = csv.DictWriter(
                 csv_file,
-                delimiter=" ",
-                quotechar="|",
-                quoting=csv.QUOTE_MINIMAL,
                 fieldnames=self.__field_names,
             )
-            work_log_writer.writeheader()
             for work_session in work_log.get_work_sessions():
                 work_log_writer.writerow(
                     {
-                        "start_time": work_session.get_start_time(),
-                        "end_time": work_session.get_end_time(),
+                        "start_time": work_session.get_start_time().to_iso8601_string(),
+                        "end_time": work_session.get_end_time().to_iso8601_string(),
                     }
                 )
 
@@ -76,8 +72,6 @@ class CsvRepository(AbstractRepository):
             for row in csv.DictReader(
                 csv_file,
                 fieldnames=["start_time", "end_time"],
-                delimiter=" ",
-                quotechar="|",
             ):
                 new_work_log.add_session(
                     PendulumWorkSession(
