@@ -42,7 +42,7 @@ def test_get_project():
     assert my_log.get_project() == "1"
 
 
-def test_get_work_sessions():
+def test_generate_work_sessions():
 
     first = PendulumWorkSession().end_session()
     second = PendulumWorkSession().end_session()
@@ -50,7 +50,7 @@ def test_get_work_sessions():
     my_log.add_session(first)
     my_log.add_session(second)
     i = 0
-    for s in my_log.get_work_sessions():
+    for s in my_log.generate_work_sessions():
         assert isinstance(s, PendulumWorkSession)
         if i == 0:
             assert s == first

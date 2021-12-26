@@ -100,7 +100,7 @@ class AbstractWorkLog(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_work_sessions(self) -> Generator[AbstractWorkSession, None, None]:
+    def generate_work_sessions(self) -> Generator[AbstractWorkSession, None, None]:
         """
         Yields
         -------

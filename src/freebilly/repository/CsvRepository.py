@@ -50,7 +50,7 @@ class CsvRepository(AbstractRepository):
                 fieldnames=self.__field_names,
             )
             work_log_writer.writeheader()
-            for work_session in work_log.get_work_sessions():
+            for work_session in work_log.generate_work_sessions():
                 work_log_writer.writerow(
                     {
                         "start_time": work_session.get_start_time().to_iso8601_string(),

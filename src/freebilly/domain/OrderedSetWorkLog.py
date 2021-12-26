@@ -58,7 +58,7 @@ class OrderedSetWorkLog(AbstractWorkLog):
 
         return len(self.__sessions) == 0
 
-    def get_work_sessions(self) -> Generator[PendulumWorkSession, None, None]:
+    def generate_work_sessions(self) -> Generator[PendulumWorkSession, None, None]:
 
         for s in self.__sessions:
             yield s
