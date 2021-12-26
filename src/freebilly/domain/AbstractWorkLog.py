@@ -106,3 +106,14 @@ class AbstractWorkLog(abc.ABC):
         -------
             AbstractWorkSession
         """
+
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def __len__(self) -> int:
+        """
+        Returns
+        -------
+        int
+            number of work sessions recorded in this work log
+        """

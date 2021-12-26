@@ -62,3 +62,7 @@ class OrderedSetWorkLog(AbstractWorkLog):
 
         for s in self.__sessions:
             yield s
+
+    def __len__(self) -> int:
+
+        return len(self.__sessions)
