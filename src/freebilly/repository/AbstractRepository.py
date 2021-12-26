@@ -15,11 +15,16 @@ class AbstractRepository(abc.ABC):
     def push(self, work_log: AbstractWorkLog) -> None:
 
         """
-        pushes work log to repository
+        pushes a non empty work log to repository.
 
         Parameters
         ----------
         work_log: AbstractWorkLog
+
+        Raises
+        ------
+        ValueError
+            if `work_log` is empty.
         """
 
         raise NotImplementedError
@@ -35,11 +40,29 @@ class AbstractRepository(abc.ABC):
         Returns
         -------
         bool
-            True if a work log associated with `client` and `project` can be fetched
+            True if the representation of the work log associated with `client` and `project` can be fetched
             from repo.
         """
 
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def valid(self, client: str, project: str) -> bool:
+
+        """
+
+        Parameters
+        ----------
+        client: str
+        project: str
+
+        Returns
+        -------
+        bool
+            True if the representation of the work log associated with `client` and `project`
+            is valid. What 'valid' means depends on the particular implementation of `AbstractRepository`.
+
+        """
 
     @abc.abstractmethod
     def get(self, client: str, project: str) -> AbstractWorkLog:
@@ -60,7 +83,8 @@ class AbstractRepository(abc.ABC):
         Raises
         ------
         ValueError
-            if work log specified does not exist.
+            if work log specified does not exist or if, if it exists but
+            work log representation is invalid as per `self.valid()`.
         """
 
         raise NotImplementedError
