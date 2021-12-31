@@ -8,23 +8,23 @@ class AbstractRepository(abc.ABC):
     abstraction for a repository of work logs
     """
 
-    @abc.abstractmethod
-    def push(self, work_log: AbstractWorkLog) -> None:
-
-        """
-        pushes a non empty work log to repository.
-
-        Parameters
-        ----------
-        work_log: AbstractWorkLog
-
-        Raises
-        ------
-        ValueError
-            if `work_log` is empty.
-        """
-
-        raise NotImplementedError
+    # @abc.abstractmethod
+    # def push(self, work_log: AbstractWorkLog) -> None:
+    #
+    #     """
+    #     pushes a non empty work log to repository.
+    #
+    #     Parameters
+    #     ----------
+    #     work_log: AbstractWorkLog
+    #
+    #     Raises
+    #     ------
+    #     ValueError
+    #         if `work_log` is empty.
+    #     """
+    #
+    #     raise NotImplementedError
 
     @abc.abstractmethod
     def exists(self, client: str, project: str) -> bool:

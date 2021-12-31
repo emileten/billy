@@ -69,20 +69,20 @@ def test_empty_csv_is_not_valid(): #TODO this is almost entirely a duplicate of 
         assert not repo.valid('A', '1')
         os.rename(csv_path, temp_fp.name)  # finally, rename back
 
-def test_newly_pushed_log_exists():
-    with TemporaryDirectory() as fake_dir_path:
-        repo = CsvRepository(Path(fake_dir_path))
-        my_work_session = PendulumWorkSession(start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 2, 2))
-        non_empty_work_log = OrderedSetWorkLog(client='A', project='1', sessions=ordered_set.OrderedSet([my_work_session]))
-        repo.push(non_empty_work_log)
-        assert repo.exists(client='A', project='1')
+# def test_newly_pushed_log_exists():
+#     with TemporaryDirectory() as fake_dir_path:
+#         repo = CsvRepository(Path(fake_dir_path))
+#         my_work_session = PendulumWorkSession(start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 2, 2))
+#         non_empty_work_log = OrderedSetWorkLog(client='A', project='1', sessions=ordered_set.OrderedSet([my_work_session]))
+#         repo.push(non_empty_work_log)
+#         assert repo.exists(client='A', project='1')
 
-def test_pushing_empty_log_fails():
-    with TemporaryDirectory() as fake_dir_path:
-        repo = CsvRepository(Path(fake_dir_path))
-        empty_work_log = OrderedSetWorkLog(client='A', project='1')
-        with pytest.raises(ValueError):
-            repo.push(empty_work_log)
+# def test_pushing_empty_log_fails():
+#     with TemporaryDirectory() as fake_dir_path:
+#         repo = CsvRepository(Path(fake_dir_path))
+#         empty_work_log = OrderedSetWorkLog(client='A', project='1')
+#         with pytest.raises(ValueError):
+#             repo.push(empty_work_log)
 
 
 def test_can_get_log_from_manually_written_csv():
@@ -118,23 +118,23 @@ def test_getting_non_existing_log_from_repo_fails():
     with pytest.raises(ValueError):
         repo.get('A', '1')
 
-def test_can_get_log_pushed_through_repo():
-    with TemporaryDirectory() as fake_dir_path:
-        repo = CsvRepository(Path(fake_dir_path))
-        my_work_session = PendulumWorkSession(start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 2, 2))
-        non_empty_work_log = OrderedSetWorkLog(client='A', project='1', sessions=ordered_set.OrderedSet([my_work_session]))
-        repo.push(non_empty_work_log)
-        assert repo.exists('A', '1')
-        retrieved_log = repo.get('A', '1')
-        assert my_work_session in retrieved_log
+# def test_can_get_log_pushed_through_repo():
+#     with TemporaryDirectory() as fake_dir_path:
+#         repo = CsvRepository(Path(fake_dir_path))
+#         my_work_session = PendulumWorkSession(start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 2, 2))
+#         non_empty_work_log = OrderedSetWorkLog(client='A', project='1', sessions=ordered_set.OrderedSet([my_work_session]))
+#         repo.push(non_empty_work_log)
+#         assert repo.exists('A', '1')
+#         retrieved_log = repo.get('A', '1')
+#         assert my_work_session in retrieved_log
 
 
-def test_can_get_csv_path_of_log_from_repo():
-    with TemporaryDirectory() as fake_dir_path:
-        repo = CsvRepository(Path(fake_dir_path))
-        my_work_session = PendulumWorkSession(start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 2, 2))
-        non_empty_work_log = OrderedSetWorkLog(client='A', project='1', sessions=ordered_set.OrderedSet([my_work_session]))
-        repo.push(non_empty_work_log)
-        assert repo.get_csv_file_path('A','1') == str(Path(fake_dir_path).joinpath('work_log_A_1.csv'))
-
-
+# def test_can_get_csv_path_of_log_from_repo():
+#     with TemporaryDirectory() as fake_dir_path:
+#         repo = CsvRepository(Path(fake_dir_path))
+#         my_work_session = PendulumWorkSession(start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 2, 2))
+#         non_empty_work_log = OrderedSetWorkLog(client='A', project='1', sessions=ordered_set.OrderedSet([my_work_session]))
+#         repo.push(non_empty_work_log)
+#         assert repo.get_csv_file_path('A','1') == str(Path(fake_dir_path).joinpath('work_log_A_1.csv'))
+#
+#

@@ -33,27 +33,27 @@ class CsvRepository(AbstractRepository):
         self.__file_name_prefix = prefix
         self.__field_names = field_names
 
-    def push(self, work_log: AbstractWorkLog) -> None:
-
-        if work_log.is_empty():
-            raise ValueError("cannot push an empty work log to repository")
-        with open(
-            self.get_csv_file_path(work_log.get_client(), work_log.get_project()),
-            "w",
-            newline="",
-        ) as csv_file:
-            work_log_writer = csv.DictWriter(
-                csv_file,
-                fieldnames=self.__field_names,
-            )
-            work_log_writer.writeheader()
-            for work_session in work_log.generate_work_sessions():
-                work_log_writer.writerow(
-                    {
-                        "start_time": work_session.get_start_time().to_iso8601_string(),
-                        "end_time": work_session.get_end_time().to_iso8601_string(),
-                    }
-                )
+    # def push(self, work_log: AbstractWorkLog) -> None:
+    #
+    #     if work_log.is_empty():
+    #         raise ValueError("cannot push an empty work log to repository")
+    #     with open(
+    #         self.get_csv_file_path(work_log.get_client(), work_log.get_project()),
+    #         "w",
+    #         newline="",
+    #     ) as csv_file:
+    #         work_log_writer = csv.DictWriter(
+    #             csv_file,
+    #             fieldnames=self.__field_names,
+    #         )
+    #         work_log_writer.writeheader()
+    #         for work_session in work_log.generate_work_sessions():
+    #             work_log_writer.writerow(
+    #                 {
+    #                     "start_time": work_session.get_start_time().to_iso8601_string(),
+    #                     "end_time": work_session.get_end_time().to_iso8601_string(),
+    #                 }
+    #             )
 
     def exists(self, client: str, project: str) -> bool:
 
