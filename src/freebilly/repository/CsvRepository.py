@@ -12,13 +12,11 @@ import pendulum as pdl  # TODO this is coupled with pendulum so PendulumWorkSess
 class CsvRepository(AbstractRepository):
 
     """
-    essentially, operates to and from a work log, to and from a csv file where a row is
-    a work session in that work log, with a start time and an end_time column.
+    an instance of an AbstractRepository where Csvs are used to store work logs in a folder. 
     """
 
-    __work_log_path: Path
-    __work_log_prefix: str
-    __work_log: Union[None, AbstractWorkLog]
+    __repository_path: Path
+    __file_name_prefix: str
     __field_names: List
 
     def __init__(self, path: Path, prefix = "work_log", field_names = ["start_time", "end_time"] ) -> None:
@@ -31,9 +29,8 @@ class CsvRepository(AbstractRepository):
         """
         if not path.exists():
             raise ValueError("nonexistent path")
-        self.__work_log_path = path
-        self.__work_log = None
-        self.__work_log_prefix = prefix
+        self.__repository_path = path
+        self.__file_name_prefix = prefix
         self.__field_names = field_names
 
     def push(self, work_log: AbstractWorkLog) -> None:
@@ -147,7 +144,7 @@ class CsvRepository(AbstractRepository):
         """
 
         return str(
-            self.__work_log_path.joinpath(
-                self.__work_log_prefix + "_" + client + "_" + project + ".csv"
+            self.__repository_path.joinpath(
+                self.__file_name_prefix + "_" + client + "_" + project + ".csv"
             )
         )

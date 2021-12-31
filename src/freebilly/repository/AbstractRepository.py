@@ -1,15 +1,12 @@
 import abc
-from typing import Union
 from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
 
 
 class AbstractRepository(abc.ABC):
 
     """
-    abstraction for a work log repository
+    abstraction for a repository of work logs
     """
-
-    __work_log: Union[None, AbstractWorkLog]
 
     @abc.abstractmethod
     def push(self, work_log: AbstractWorkLog) -> None:
