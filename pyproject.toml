@@ -2,6 +2,7 @@
 requires = [
     "pendulum",
     "setuptools >=42",
-    "wheel"
+    "wheel",
+    "click"
 ]
 build-backend = "setuptools.build_meta"

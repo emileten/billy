@@ -29,6 +29,6 @@ class ClickEndPoint(AbstractEndPoint, click.group):
         work_log, work_session = ConcreteServiceLayer.start_session(
             uow, client, project
         )
-        input("press enter to end the session...")
+        click.confirm("press enter to end the session...")
         logging.info("ending session and pushing to work log...")
         ConcreteServiceLayer.end_session(uow, work_log, work_session)
