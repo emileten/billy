@@ -8,7 +8,6 @@ from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
 from src.freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
 
 
-@pytest.mark.skip(reason="unimplemented")
 def test_start_session():
 
     with TemporaryDirectory() as fake_dir_path:
@@ -21,13 +20,12 @@ def test_start_session():
         assert work_log.is_empty()  # because we have no data in this tempdir !
 
 
-@pytest.mark.skip(reason="unimplemented")
 def test_end_session():
 
     with TemporaryDirectory() as fake_dir_path:
         uow = CsvUnitOfWork(Path(fake_dir_path))
         ongoing_session = PendulumWorkSession(
-            start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 2, 2)
+            start_time=pdl.datetime(1, 1, 1)
         )
         yet_empty_work_log = OrderedSetWorkLog(client="A", project="1")
         ConcreteServiceLayer.end_session(
