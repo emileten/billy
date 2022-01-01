@@ -24,9 +24,7 @@ def test_end_session():
 
     with TemporaryDirectory() as fake_dir_path:
         uow = CsvUnitOfWork(Path(fake_dir_path))
-        ongoing_session = PendulumWorkSession(
-            start_time=pdl.datetime(1, 1, 1)
-        )
+        ongoing_session = PendulumWorkSession(start_time=pdl.datetime(1, 1, 1))
         yet_empty_work_log = OrderedSetWorkLog(client="A", project="1")
         ConcreteServiceLayer.end_session(
             uow=uow, work_log=yet_empty_work_log, work_session=ongoing_session

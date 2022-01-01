@@ -1,13 +1,19 @@
 import abc
 
+# we could have a set of functions already implemented. We use the idea of an interface just to state clearly what we expect the
+# code to look like.
+
 
 class AbstractEndPoint(abc.ABC):
 
     """
-    abstraction over an interface to record work sessions
+    abstraction over an interface for this app use cases. Implementations of this abstract class are the closest
+    point of the app to the user's actions.
     """
 
-    def record_session(self, path: str, client: str, project: str) -> None:
+    @staticmethod
+    @abc.abstractmethod
+    def record_session(path: str, client: str, project: str) -> None:
 
         """
         starts a work session, waits for the user to give the signal to end it and binds it

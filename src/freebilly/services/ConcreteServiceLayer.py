@@ -8,7 +8,6 @@ from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
 
 
 class ConcreteServiceLayer(AbstractServiceLayer):
-
     @staticmethod
     def start_session(
         uow: AbstractUnitOfWork, client: str, project: str
