@@ -16,10 +16,10 @@ def test_manually_written_csv_exists():  # other tests depend on this success
     with NamedTemporaryFile(dir=temp_folder_path) as temp_fp:
         csv_path = str(Path().joinpath(temp_folder_path, "work_log_A_1.csv"))
         os.rename(temp_fp.name, csv_path)  # because no full name choice option
-        with open(csv_path, "w", newline="") as csvfile:
-            csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(["start_time", "end_time"])
-            csvwriter.writerow(
+        with open(csv_path, "w", newline="") as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow(["start_time", "end_time"])
+            csv_writer.writerow(
                 [pdl.now().to_iso8601_string(), pdl.now().to_iso8601_string()]
             )  # TODO coupling with pendulum
         repo = CsvRepository(Path("/tmp"))
@@ -33,10 +33,10 @@ def test_valid_csv_is_valid():  # TODO this is almost entirely a duplicate of te
     with NamedTemporaryFile(dir=temp_folder_path) as temp_fp:
         csv_path = str(Path().joinpath(temp_folder_path, "work_log_A_1.csv"))
         os.rename(temp_fp.name, csv_path)  # because no full name choice option
-        with open(csv_path, "w", newline="") as csvfile:
-            csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(["start_time", "end_time"])
-            csvwriter.writerow(
+        with open(csv_path, "w", newline="") as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow(["start_time", "end_time"])
+            csv_writer.writerow(
                 [pdl.now().to_iso8601_string(), pdl.now().to_iso8601_string()]
             )  # TODO coupling with pendulum
         repo = CsvRepository(Path("/tmp"))
@@ -49,10 +49,10 @@ def test_bad_column_csv_is_not_valid():  # TODO this is almost entirely a duplic
     with NamedTemporaryFile(dir=temp_folder_path) as temp_fp:
         csv_path = str(Path().joinpath(temp_folder_path, "work_log_A_1.csv"))
         os.rename(temp_fp.name, csv_path)  # because no full name choice option
-        with open(csv_path, "w", newline="") as csvfile:
-            csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(["bad_name", "end_time"])
-            csvwriter.writerow(
+        with open(csv_path, "w", newline="") as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow(["bad_name", "end_time"])
+            csv_writer.writerow(
                 [pdl.now().to_iso8601_string(), pdl.now().to_iso8601_string()]
             )  # TODO coupling with pendulum
         repo = CsvRepository(Path("/tmp"))
@@ -65,9 +65,9 @@ def test_empty_csv_is_not_valid():  # TODO this is almost entirely a duplicate o
     with NamedTemporaryFile(dir=temp_folder_path) as temp_fp:
         csv_path = str(Path().joinpath(temp_folder_path, "work_log_A_1.csv"))
         os.rename(temp_fp.name, csv_path)  # because no full name choice option
-        with open(csv_path, "w", newline="") as csvfile:
-            csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(["start_time", "end_time"])
+        with open(csv_path, "w", newline="") as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow(["start_time", "end_time"])
         repo = CsvRepository(Path("/tmp"))
         assert not repo.valid("A", "1")
         os.rename(csv_path, temp_fp.name)  # finally, rename back

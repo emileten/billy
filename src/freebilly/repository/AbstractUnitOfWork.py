@@ -1,3 +1,4 @@
+from __future__ import annotations
 import abc
 from src.freebilly.repository.AbstractRepository import AbstractRepository
 from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
@@ -9,6 +10,9 @@ class AbstractUnitOfWork(abc.ABC):
     """
 
     work_logs: AbstractRepository
+
+    def __enter__(self) -> AbstractUnitOfWork:
+        return self
 
     def __exit__(self, *args):
         self.rollback()
