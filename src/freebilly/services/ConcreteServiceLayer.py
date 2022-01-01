@@ -8,8 +8,10 @@ from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
 
 
 class ConcreteServiceLayer(AbstractServiceLayer):
+
+    @staticmethod
     def start_session(
-        self, uow: AbstractUnitOfWork, client: str, project: str
+        uow: AbstractUnitOfWork, client: str, project: str
     ) -> Tuple[OrderedSetWorkLog, PendulumWorkSession]:
 
         work_session = PendulumWorkSession()
@@ -21,8 +23,8 @@ class ConcreteServiceLayer(AbstractServiceLayer):
 
         return work_log, work_session
 
+    @staticmethod
     def end_session(
-        self,
         uow: AbstractUnitOfWork,
         work_log: OrderedSetWorkLog,
         work_session: PendulumWorkSession,

@@ -11,9 +11,10 @@ class AbstractServiceLayer(abc.ABC):
     abstraction over use cases of our app.
     """
 
+    @staticmethod
     @abc.abstractmethod
     def start_session(
-        self, uow: AbstractUnitOfWork, client: str, project: str
+        uow: AbstractUnitOfWork, client: str, project: str
     ) -> Tuple[AbstractWorkLog, AbstractWorkSession]:
 
         """
@@ -34,9 +35,9 @@ class AbstractServiceLayer(abc.ABC):
         """
         raise NotImplementedError
 
+    @staticmethod
     @abc.abstractmethod
     def end_session(
-        self,
         uow: AbstractUnitOfWork,
         work_log: AbstractWorkLog,
         work_session: AbstractWorkSession,
