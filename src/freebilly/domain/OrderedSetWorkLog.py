@@ -16,7 +16,12 @@ class OrderedSetWorkLog(AbstractWorkLog):
     __project: str
     __sessions: OrderedSet[PendulumWorkSession]
 
-    def __init__(self, client: str, project: str, sessions : Union[None, OrderedSet[PendulumWorkSession]] = None) -> None:
+    def __init__(
+        self,
+        client: str,
+        project: str,
+        sessions: Union[None, OrderedSet[PendulumWorkSession]] = None,
+    ) -> None:
         self.__client = client
         self.__project = project
         self.__sessions = OrderedSet()

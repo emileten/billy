@@ -58,13 +58,14 @@ def test_generate_work_sessions():
             assert s == second
         i = i + 1
 
+
 def test_len():
 
     first = PendulumWorkSession().end_session()
     second = PendulumWorkSession().end_session()
     my_log = OrderedSetWorkLog(client="A", project="1")
-    assert len(my_log)==0
+    assert len(my_log) == 0
     my_log.add_session(first)
-    assert  len(my_log)==1
+    assert len(my_log) == 1
     my_log.add_session(second)
-    assert len(my_log)==2
+    assert len(my_log) == 2

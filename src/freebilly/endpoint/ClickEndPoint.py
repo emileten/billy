@@ -3,18 +3,13 @@ import click
 
 
 class ClickEndPoint(AbstractEndPoint):
-
     def record_session(self, path: str, client: str, project: str) -> None:
 
         raise NotImplementedError
 
 
-
-
-
-
-
 from src.freebilly.services.ConcreteServiceLayer import ConcreteServiceLayer
+
 # import sys
 # import logging
 # import pathlib

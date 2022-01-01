@@ -6,15 +6,26 @@ from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
 # of initiating with user supplied times you should be able to fix that.
 # TODO fixtures will make this DRY
 
+
 def test_init_existing_session_with_start_and_end():
-    my_session = PendulumWorkSession(start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 2, 2))
+    my_session = PendulumWorkSession(
+        start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 2, 2)
+    )
     expected_start, expected_end = pdl.datetime(1, 1, 1), pdl.datetime(1, 2, 2)
-    assert (my_session.get_start_time(), my_session.get_end_time()) == (expected_start, expected_end)
+    assert (my_session.get_start_time(), my_session.get_end_time()) == (
+        expected_start,
+        expected_end,
+    )
+
 
 def test_init_with_start_without_end():
     my_session = PendulumWorkSession(start_time=pdl.datetime(1, 1, 1))
     expected_start, expected_end = pdl.datetime(1, 1, 1), None
-    assert (my_session.get_start_time(), my_session.get_end_time()) == (expected_start, expected_end)
+    assert (my_session.get_start_time(), my_session.get_end_time()) == (
+        expected_start,
+        expected_end,
+    )
+
 
 def test_init_without_start_with_end():
     with pytest.raises(ValueError):
@@ -70,11 +81,17 @@ def test_unequal():
     o2 = PendulumWorkSession().end_session()
     assert o1 != o2
 
+
 def test_equal():
 
-    my_session_1 = PendulumWorkSession(start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 1, 1))
-    my_session_2 = PendulumWorkSession(start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 1, 1))
+    my_session_1 = PendulumWorkSession(
+        start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 1, 1)
+    )
+    my_session_2 = PendulumWorkSession(
+        start_time=pdl.datetime(1, 1, 1), end_time=pdl.datetime(1, 1, 1)
+    )
     assert my_session_1 == my_session_2
+
 
 def test_total_time():
 

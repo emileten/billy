@@ -1,4 +1,4 @@
-from typing import Union, List
+from typing import List
 from pathlib import Path
 import csv
 import logging
@@ -19,7 +19,9 @@ class CsvRepository(AbstractRepository):
     __file_name_prefix: str
     __field_names: List
 
-    def __init__(self, path: Path, prefix = "work_log", field_names = ["start_time", "end_time"] ) -> None:
+    def __init__(
+        self, path: Path, prefix="work_log", field_names=["start_time", "end_time"]
+    ) -> None:
 
         """
         Parameters
@@ -32,28 +34,6 @@ class CsvRepository(AbstractRepository):
         self.__repository_path = path
         self.__file_name_prefix = prefix
         self.__field_names = field_names
-
-    # def push(self, work_log: AbstractWorkLog) -> None:
-    #
-    #     if work_log.is_empty():
-    #         raise ValueError("cannot push an empty work log to repository")
-    #     with open(
-    #         self.get_csv_file_path(work_log.get_client(), work_log.get_project()),
-    #         "w",
-    #         newline="",
-    #     ) as csv_file:
-    #         work_log_writer = csv.DictWriter(
-    #             csv_file,
-    #             fieldnames=self.__field_names,
-    #         )
-    #         work_log_writer.writeheader()
-    #         for work_session in work_log.generate_work_sessions():
-    #             work_log_writer.writerow(
-    #                 {
-    #                     "start_time": work_session.get_start_time().to_iso8601_string(),
-    #                     "end_time": work_session.get_end_time().to_iso8601_string(),
-    #                 }
-    #             )
 
     def exists(self, client: str, project: str) -> bool:
 
@@ -76,21 +56,28 @@ class CsvRepository(AbstractRepository):
         returns False, True otherwise.
         """
         if not self.exists(client, project):
-            raise ValueError("cannot check validity of work log that does not exist in repository")
+            raise ValueError(
+                "cannot check validity of work log that does not exist in repository"
+            )
         i = 0
         is_valid = True
         with open(self.get_csv_file_path(client, project), newline="") as csv_file:
             csv_reader = csv.reader(csv_file)
             for row in csv_reader:
                 if i == 0:
-                    if row != ['start_time', 'end_time']:
+                    if row != ["start_time", "end_time"]:
                         logging.warning("invalid header in csv work log file")
                         is_valid = False
                 elif i == 1:
                     try:
-                        (pdl.parse(row[0]), pdl.parse(row[1])) # TODO here is a coupling with PendulumWorkSession
+                        (
+                            pdl.parse(row[0]),
+                            pdl.parse(row[1]),
+                        )  # TODO here is a coupling with PendulumWorkSession
                     except Exception:
-                        logging.warning("unable to parse first row after header in csv work log file")
+                        logging.warning(
+                            "unable to parse first row after header in csv work log file"
+                        )
                         is_valid = False
                 else:
                     break
@@ -115,13 +102,12 @@ class CsvRepository(AbstractRepository):
         )  # TODO here is a coupling with OrderedSetWorkLog
         with open(csv_file_path, newline="") as csv_file:
             csv_reader = csv.DictReader(
-                csv_file,
-                fieldnames=["start_time", "end_time"],
+                csv_file, fieldnames=["start_time", "end_time"],
             )
-            next(csv_reader) # skip header
+            next(csv_reader)  # skip header
             for row in csv_reader:
                 new_work_log.add_session(
-                    PendulumWorkSession( #TODO here is a coupling with PendulumWorkSession
+                    PendulumWorkSession(  # TODO here is a coupling with PendulumWorkSession
                         pdl.parse(row["start_time"]), pdl.parse(row["end_time"])
                     )
                 )
@@ -148,3 +134,7 @@ class CsvRepository(AbstractRepository):
                 self.__file_name_prefix + "_" + client + "_" + project + ".csv"
             )
         )
+
+    def get_field_names(self):
+
+        return self.__field_names

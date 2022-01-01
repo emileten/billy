@@ -1,10 +1,11 @@
 import abc
 from src.freebilly.repository.AbstractRepository import AbstractRepository
+from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
+
 
 class AbstractUnitOfWork(abc.ABC):
     """
-    object to atomically operate on work log repository.
-    While the repository represents the persistence mechanism, the unit of work wraps transactions with the repository. .
+    an interface to access to a repository object and safely commit changes to database
     """
 
     work_logs: AbstractRepository
@@ -13,7 +14,7 @@ class AbstractUnitOfWork(abc.ABC):
         self.rollback()
 
     @abc.abstractmethod
-    def commit(self) -> None:
+    def commit(self, work_log: AbstractWorkLog) -> None:
         """
         operate a change to the repository
         """
@@ -21,14 +22,4 @@ class AbstractUnitOfWork(abc.ABC):
 
     @abc.abstractmethod
     def rollback(self) -> None:
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get(self) -> None:
-        """
-        Returns
-        -------
-        AbstractRepository
-            the repo it operates on
-        """
         raise NotImplementedError

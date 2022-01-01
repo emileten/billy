@@ -13,7 +13,9 @@ class AbstractServiceLayer(abc.ABC):
     """
 
     @abc.abstractmethod
-    def start_session(self, uow: AbstractUnitOfWork, client: str, project: str) -> Tuple[AbstractUnitOfWork, AbstractWorkLog, AbstractWorkSession]:
+    def start_session(
+        self, uow: AbstractUnitOfWork, client: str, project: str
+    ) -> Tuple[AbstractUnitOfWork, AbstractWorkLog, AbstractWorkSession]:
 
         """
         Starts a work session and provides the objects needed to manage it.
@@ -32,7 +34,12 @@ class AbstractServiceLayer(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def end_session(self, uow: AbstractUnitOfWork, work_log: AbstractWorkLog, work_session: AbstractWorkSession) -> None:
+    def end_session(
+        self,
+        uow: AbstractUnitOfWork,
+        work_log: AbstractWorkLog,
+        work_session: AbstractWorkSession,
+    ) -> None:
 
         """
         Ends a work session, and commits it to some repository through a unit of work.
