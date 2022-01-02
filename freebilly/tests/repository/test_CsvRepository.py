@@ -4,9 +4,9 @@ from tempfile import NamedTemporaryFile
 from pathlib import Path
 import pytest
 import pendulum as pdl
-from src.freebilly.repository.CsvRepository import CsvRepository
-from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
-from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
+from freebilly.repository.CsvRepository import CsvRepository
+from freebilly.domain.AbstractWorkLog import AbstractWorkLog
+from freebilly.domain.PendulumWorkSession import PendulumWorkSession
 
 # TODO there is a LOT, LOT of duplicate stuff, consider fixtures, but it's hard because of context managers. Oh. Consider having a util func with a context manager that YIELDS.
 

@@ -1,7 +1,7 @@
 from pathlib import Path
-from src.freebilly.endpoint.AbstractEndPoint import AbstractEndPoint
-from src.freebilly.services.ConcreteServiceLayer import ConcreteServiceLayer
-from src.freebilly.repository.CsvUnitOfWork import CsvUnitOfWork
+from freebilly.endpoint.AbstractEndPoint import AbstractEndPoint
+from freebilly.services.ConcreteServiceLayer import ConcreteServiceLayer
+from freebilly.repository.CsvUnitOfWork import CsvUnitOfWork
 import logging
 import click
 

@@ -2,10 +2,10 @@ from typing import List
 from pathlib import Path
 import csv
 import logging
-from src.freebilly.repository.AbstractRepository import AbstractRepository
-from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
-from src.freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
-from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
+from freebilly.repository.AbstractRepository import AbstractRepository
+from freebilly.domain.AbstractWorkLog import AbstractWorkLog
+from freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
+from freebilly.domain.PendulumWorkSession import PendulumWorkSession
 import pendulum as pdl  # TODO this is coupled with pendulum so PendulumWorkSession...
 
 

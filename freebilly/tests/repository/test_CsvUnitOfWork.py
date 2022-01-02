@@ -3,9 +3,9 @@ from pathlib import Path
 import pytest
 import pendulum as pdl
 import ordered_set
-from src.freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
-from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
-from src.freebilly.repository.CsvUnitOfWork import CsvUnitOfWork
+from freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
+from freebilly.domain.PendulumWorkSession import PendulumWorkSession
+from freebilly.repository.CsvUnitOfWork import CsvUnitOfWork
 
 
 def test_newly_committed_log_exists():

@@ -1,7 +1,7 @@
 import pytest
 import pendulum as pdl
-from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
-from src.freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
+from freebilly.domain.PendulumWorkSession import PendulumWorkSession
+from freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
 
 
 def test_add_session():

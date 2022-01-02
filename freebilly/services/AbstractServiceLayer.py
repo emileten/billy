@@ -1,8 +1,8 @@
 import abc
 from typing import Tuple
-from src.freebilly.repository.AbstractUnitOfWork import AbstractUnitOfWork
-from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
-from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
+from freebilly.repository.AbstractUnitOfWork import AbstractUnitOfWork
+from freebilly.domain.AbstractWorkLog import AbstractWorkLog
+from freebilly.domain.AbstractWorkSession import AbstractWorkSession
 
 
 class AbstractServiceLayer(abc.ABC):

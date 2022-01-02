@@ -1,6 +1,6 @@
 import abc
 from typing import Any, Generator
-from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
+from freebilly.domain.AbstractWorkSession import AbstractWorkSession
 
 
 class AbstractWorkLog(abc.ABC):

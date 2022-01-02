@@ -1,8 +1,8 @@
 from typing import Tuple
-from src.freebilly.repository.AbstractUnitOfWork import AbstractUnitOfWork
-from src.freebilly.services.AbstractServiceLayer import AbstractServiceLayer
-from src.freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
-from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
+from freebilly.repository.AbstractUnitOfWork import AbstractUnitOfWork
+from freebilly.services.AbstractServiceLayer import AbstractServiceLayer
+from freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
+from freebilly.domain.PendulumWorkSession import PendulumWorkSession
 
 # TODO coupling with OrderedSetWorkLog and PendulumWorkSession
 

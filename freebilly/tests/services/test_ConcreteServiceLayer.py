@@ -1,11 +1,10 @@
 from tempfile import TemporaryDirectory
 from pathlib import Path
-import pytest
 import pendulum as pdl
-from src.freebilly.repository.CsvUnitOfWork import CsvUnitOfWork
-from src.freebilly.services.ConcreteServiceLayer import ConcreteServiceLayer
-from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
-from src.freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
+from freebilly.repository.CsvUnitOfWork import CsvUnitOfWork
+from freebilly.services.ConcreteServiceLayer import ConcreteServiceLayer
+from freebilly.domain.PendulumWorkSession import PendulumWorkSession
+from freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
 
 
 def test_start_session():

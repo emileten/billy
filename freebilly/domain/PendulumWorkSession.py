@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import Union
-from src.freebilly.domain.AbstractWorkSession import AbstractWorkSession
+from freebilly.domain.AbstractWorkSession import AbstractWorkSession
 import pendulum as pdl
 
 # TODO you can consider having a separate abstraction for the time. This would become TupleWorkSession.

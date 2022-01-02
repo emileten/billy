@@ -1,4 +1,4 @@
-from src.freebilly.domain.AbstractWorkTime import AbstractWorkTime
+from freebilly.domain.AbstractWorkTime import AbstractWorkTime
 import pendulum as pdl
 
 

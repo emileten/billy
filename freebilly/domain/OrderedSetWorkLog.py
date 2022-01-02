@@ -1,7 +1,7 @@
-from typing import Set, Union, Generator
+from typing import Union, Generator
 from ordered_set import OrderedSet
-from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
-from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
+from freebilly.domain.AbstractWorkLog import AbstractWorkLog
+from freebilly.domain.PendulumWorkSession import PendulumWorkSession
 import pendulum as pdl
 
 

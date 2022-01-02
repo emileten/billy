@@ -1,6 +1,6 @@
 import pendulum as pdl
 import pytest
-from src.freebilly.domain.PendulumWorkSession import PendulumWorkSession
+from freebilly.domain.PendulumWorkSession import PendulumWorkSession
 
 # TODO many tests here are contingent on machine execution time. Since you added the possibility
 # of initiating with user supplied times you should be able to fix that.

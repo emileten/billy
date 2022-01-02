@@ -1,7 +1,7 @@
 from __future__ import annotations
 import abc
-from src.freebilly.repository.AbstractRepository import AbstractRepository
-from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
+from freebilly.repository.AbstractRepository import AbstractRepository
+from freebilly.domain.AbstractWorkLog import AbstractWorkLog
 
 
 class AbstractUnitOfWork(abc.ABC):

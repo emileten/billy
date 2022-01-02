@@ -1,5 +1,5 @@
 import abc
-from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
+from freebilly.domain.AbstractWorkLog import AbstractWorkLog
 
 
 class AbstractRepository(abc.ABC):

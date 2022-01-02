@@ -1,8 +1,8 @@
 import csv
 from pathlib import Path
-from src.freebilly.repository.CsvRepository import CsvRepository
-from src.freebilly.repository.AbstractUnitOfWork import AbstractUnitOfWork
-from src.freebilly.domain.AbstractWorkLog import AbstractWorkLog
+from freebilly.repository.CsvRepository import CsvRepository
+from freebilly.repository.AbstractUnitOfWork import AbstractUnitOfWork
+from freebilly.domain.AbstractWorkLog import AbstractWorkLog
 
 
 class CsvUnitOfWork(AbstractUnitOfWork):
