@@ -8,7 +8,8 @@ import click
 logging.basicConfig(level=logging.INFO)
 
 
-class ClickEndPoint(AbstractEndPoint, click.group):
+class ClickEndPoint(AbstractEndPoint):
+
     @staticmethod
     @click.command(help="record a work session in a log")
     @click.option(
