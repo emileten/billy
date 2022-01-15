@@ -1,9 +1,13 @@
 from __future__ import annotations
-import abc
 from typing import Any
+from custom_inherit import DocInheritMeta
+
+# TODO work in progress, not usable
 
 
-class AbstractWorkTime(abc.ABC):
+class AbstractWorkTime(
+    metaclass=DocInheritMeta(style="numpy", abstract_base_class=True)
+):
 
     """
     abstraction for the type of time stamp you need to store in a work log.
@@ -21,6 +25,8 @@ class AbstractWorkTime(abc.ABC):
         time: Any
             some representation of time that can offer hours, minutes and seconds.
         """
+
+        raise NotImplementedError
 
     def now(self) -> AbstractWorkTime:
 

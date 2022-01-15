@@ -1,4 +1,4 @@
-from typing import Union, Generator
+from typing import Union, Generator, Literal
 from ordered_set import OrderedSet
 from freebilly.domain.AbstractWorkLog import AbstractWorkLog
 from freebilly.domain.PendulumWorkSession import PendulumWorkSession
@@ -7,13 +7,10 @@ import pendulum as pdl
 
 class OrderedSetWorkLog(AbstractWorkLog):
 
-    """
-    implementation of AbstractWorkLog using a Set and PendulumWorkSession
-    @TODO this is coupled to PendulumWorkSession. Can couple that to AbstractWorkSession instead ?
-    """
+    # TODO this is coupled to PendulumWorkSession. Can couple that to AbstractWorkSession instead ?
 
-    __client: str
-    __project: str
+    # TODO shouldn't I use super or something ?
+
     __sessions: OrderedSet[PendulumWorkSession]
 
     def __init__(
@@ -39,9 +36,13 @@ class OrderedSetWorkLog(AbstractWorkLog):
 
         return session in self.__sessions
 
-    def total_time(self, start_time: pdl.DateTime, end_time: pdl.DateTime) -> int:
+    def total_time(
+        self,
+        start_time: pdl.DateTime,
+        end_time: pdl.DateTime,
+        unit: Literal["seconds", "minutes", "hours"] = "hours",
+    ) -> float:
 
-        # filter sessions that have their start time after start_time AND end_time before end_time
         total = 0
         for labor in self.__sessions:
             if (
@@ -49,7 +50,17 @@ class OrderedSetWorkLog(AbstractWorkLog):
                 and labor.get_end_time() <= end_time
             ):
                 total = total + labor.total_time()
-        return total
+
+        if unit == "seconds":
+            return total
+        elif unit == "minutes":
+            return round(total / 60, 2)
+        elif unit == "hours":
+            return round((total / 60) / 60, 2)
+        else:
+            raise ValueError(
+                "the `unit` argument should be one of 'seconds', 'minutes','hours'"
+            )
 
     def get_client(self) -> str:
 

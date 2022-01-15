@@ -1,16 +1,16 @@
 import csv
 from pathlib import Path
-from freebilly.repository.CsvRepository import CsvRepository
-from freebilly.repository.AbstractUnitOfWork import AbstractUnitOfWork
+from freebilly.repository.CsvWorkLogRepository import CsvWorkLogRepository
+from freebilly.repository.AbstractWorkLogUnitOfWork import AbstractWorkLogUnitOfWork
 from freebilly.domain.AbstractWorkLog import AbstractWorkLog
 
 
-class CsvUnitOfWork(AbstractUnitOfWork):
+class CsvWorkLogUnitOfWork(AbstractWorkLogUnitOfWork):
 
-    work_logs: CsvRepository
+    work_logs: CsvWorkLogRepository
 
     def __init__(self, path: Path):
-        self.work_logs = CsvRepository(path=path)
+        self.work_logs = CsvWorkLogRepository(path=path)
 
     def commit(self, work_log: AbstractWorkLog) -> None:
 

@@ -2,17 +2,17 @@ from typing import List
 from pathlib import Path
 import csv
 import logging
-from freebilly.repository.AbstractRepository import AbstractRepository
+from freebilly.repository.AbstractWorkLogRepository import AbstractWorkLogRepository
 from freebilly.domain.AbstractWorkLog import AbstractWorkLog
 from freebilly.domain.OrderedSetWorkLog import OrderedSetWorkLog
 from freebilly.domain.PendulumWorkSession import PendulumWorkSession
 import pendulum as pdl  # TODO this is coupled with pendulum so PendulumWorkSession...
 
 
-class CsvRepository(AbstractRepository):
+class CsvWorkLogRepository(AbstractWorkLogRepository):
 
     """
-    an instance of an AbstractRepository where Csvs are used to store work logs in a folder. 
+    an instance of an AbstractWorkLogRepository where Csvs are used to store work logs in a folder. 
     """
 
     __repository_path: Path

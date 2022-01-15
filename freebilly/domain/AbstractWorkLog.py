@@ -1,9 +1,12 @@
 import abc
-from typing import Any, Generator
+from typing import Any, Generator, Literal
 from freebilly.domain.AbstractWorkSession import AbstractWorkSession
+from custom_inherit import DocInheritMeta
 
 
-class AbstractWorkLog(abc.ABC):
+class AbstractWorkLog(
+    metaclass=DocInheritMeta(style="numpy", abstract_base_class=True)
+):
     """
     abstraction for a work log
     """
@@ -29,20 +32,29 @@ class AbstractWorkLog(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def total_time(self, start_time: Any, end_time: Any) -> int:
+    def total_time(
+        self,
+        start_time: Any,
+        end_time: Any,
+        unit: Literal["seconds", "minutes", "hours"] = "hours",
+    ) -> float:
 
         """
-        returns the total time in minutes spent working between specified moments in the time
-        interval spanned by this work log.
+        returns the total time spent working between specified moments in the time
+        interval spanned by this work log. If no work sessions in the work log match
+        the interval requirement, this will return zero, as in 'no time spent working in this
+        interval'.
 
         Parameters
         ----------
         start_time
         end_time
+        unit
+            the underlying measurement precision is in seconds. If asked a higher unit, rounding at the second decimal place.
 
         Returns
         -------
-        int
+        float
         """
 
         raise NotImplementedError

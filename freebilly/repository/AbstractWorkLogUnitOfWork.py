@@ -1,17 +1,20 @@
 from __future__ import annotations
 import abc
-from freebilly.repository.AbstractRepository import AbstractRepository
+from custom_inherit import DocInheritMeta
+from freebilly.repository.AbstractWorkLogRepository import AbstractWorkLogRepository
 from freebilly.domain.AbstractWorkLog import AbstractWorkLog
 
 
-class AbstractUnitOfWork(abc.ABC):
+class AbstractWorkLogUnitOfWork(
+    metaclass=DocInheritMeta(style="numpy", abstract_base_class=True)
+):
     """
     an interface to access to a repository object and safely commit changes to database
     """
 
-    work_logs: AbstractRepository
+    work_logs: AbstractWorkLogRepository
 
-    def __enter__(self) -> AbstractUnitOfWork:
+    def __enter__(self) -> AbstractWorkLogUnitOfWork:
         return self
 
     def __exit__(self, *args):

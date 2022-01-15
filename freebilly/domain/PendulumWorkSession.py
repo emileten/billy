@@ -6,10 +6,6 @@ import pendulum as pdl
 # TODO you can consider having a separate abstraction for the time. This would become TupleWorkSession.
 class PendulumWorkSession(AbstractWorkSession):
 
-    """
-    Implementation of an AbstractWorkSession using pendulum.
-    """
-
     __start_time: pdl.DateTime
     __end_time: Union[None, pdl.DateTime]
 
@@ -90,13 +86,11 @@ class PendulumWorkSession(AbstractWorkSession):
         return x1 == y1 and x2 == y2
 
     def total_time(self) -> int:
-
         if not self.is_ended():
             raise TypeError(
                 "cannot calculate total time of a work session that is not ended"
             )
-
-        return self.get_end_time().diff(self.get_start_time()).in_minutes()
+        return self.get_end_time().diff(self.get_start_time()).in_seconds()
 
     def __hash__(self):
 

@@ -1,30 +1,15 @@
 import abc
+from custom_inherit import DocInheritMeta
 from freebilly.domain.AbstractWorkLog import AbstractWorkLog
 
 
-class AbstractRepository(abc.ABC):
+class AbstractWorkLogRepository(
+    metaclass=DocInheritMeta(style="numpy", abstract_base_class=True)
+):
 
     """
     abstraction for a repository of work logs
     """
-
-    # @abc.abstractmethod
-    # def push(self, work_log: AbstractWorkLog) -> None:
-    #
-    #     """
-    #     pushes a non empty work log to repository.
-    #
-    #     Parameters
-    #     ----------
-    #     work_log: AbstractWorkLog
-    #
-    #     Raises
-    #     ------
-    #     ValueError
-    #         if `work_log` is empty.
-    #     """
-    #
-    #     raise NotImplementedError
 
     @abc.abstractmethod
     def exists(self, client: str, project: str) -> bool:
@@ -57,7 +42,7 @@ class AbstractRepository(abc.ABC):
         -------
         bool
             True if the representation of the work log associated with `client` and `project`
-            is valid. What 'valid' means depends on the particular implementation of `AbstractRepository`.
+            is valid. What 'valid' means depends on the particular implementation of `AbstractWorkLogRepository`.
 
         """
 

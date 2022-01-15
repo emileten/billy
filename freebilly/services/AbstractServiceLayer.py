@@ -1,11 +1,17 @@
 import abc
+from pathlib import Path
 from typing import Tuple
-from freebilly.repository.AbstractUnitOfWork import AbstractUnitOfWork
+import pendulum as pdl
+from custom_inherit import DocInheritMeta
+from freebilly.repository.AbstractWorkLogUnitOfWork import AbstractWorkLogUnitOfWork
 from freebilly.domain.AbstractWorkLog import AbstractWorkLog
 from freebilly.domain.AbstractWorkSession import AbstractWorkSession
+from freebilly.repository.AbstractBillUnitOfWork import AbstractBillUnitOfWork
 
 
-class AbstractServiceLayer(abc.ABC):
+class AbstractServiceLayer(
+    metaclass=DocInheritMeta(style="numpy", abstract_base_class=True)
+):
 
     """
     abstraction over use cases of our app.
@@ -14,7 +20,7 @@ class AbstractServiceLayer(abc.ABC):
     @staticmethod
     @abc.abstractmethod
     def start_session(
-        uow: AbstractUnitOfWork, client: str, project: str
+        uow: AbstractWorkLogUnitOfWork, client: str, project: str
     ) -> Tuple[AbstractWorkLog, AbstractWorkSession]:
 
         """
@@ -24,9 +30,9 @@ class AbstractServiceLayer(abc.ABC):
 
         Parameters
         ----------
-        uow: AbstractUnitOfWork
-        client: str
-        project: str
+        uow
+        client
+        project
 
         Returns
         -------
@@ -38,7 +44,7 @@ class AbstractServiceLayer(abc.ABC):
     @staticmethod
     @abc.abstractmethod
     def end_session(
-        uow: AbstractUnitOfWork,
+        uow: AbstractWorkLogUnitOfWork,
         work_log: AbstractWorkLog,
         work_session: AbstractWorkSession,
     ) -> None:
@@ -48,8 +54,43 @@ class AbstractServiceLayer(abc.ABC):
 
         Parameters
         ----------
-        uow: AbstractUnitOfWork
+        uow: AbstractWorkLogUnitOfWork
         work_log: AbstractWorkLog
         work_session: AbstractWorkSession
         """
+        raise NotImplementedError
+
+    @staticmethod
+    @abc.abstractmethod
+    def produce_bill(
+        uow: AbstractBillUnitOfWork,
+        template_path: Path,
+        work_log_path: Path,
+        extra_info: dict,
+        client: str,
+        project: str,
+        start_time: pdl.DateTime,
+        end_time: pdl.DateTime,
+        hourly_rate: float,
+    ) -> None:
+
+        """
+
+        Parameters
+        ----------
+        uow
+        template_path
+        work_log_path
+        extra_info
+        client
+        project
+        start_time
+        end_time
+        hourly_rate
+
+        Returns
+        -------
+
+        """
+
         raise NotImplementedError

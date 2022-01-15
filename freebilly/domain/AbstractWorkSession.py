@@ -1,9 +1,12 @@
 from __future__ import annotations
 from typing import Any
 import abc
+from custom_inherit import DocInheritMeta
 
 
-class AbstractWorkSession(abc.ABC):
+class AbstractWorkSession(
+    metaclass=DocInheritMeta(style="numpy", abstract_base_class=True)
+):
 
     """
     abstraction for a work session
@@ -12,25 +15,26 @@ class AbstractWorkSession(abc.ABC):
     __start_time: Any
     __end_time: Any
 
-    @abc.abstractmethod
-    def __init__(self, start_time: Any, end_time: Any) -> None:
-
-        """
-        Parameters
-        ----------
-        start_time: Any
-            if None, starts the session, otherwise stores the value provided.
-        end_time: Any
-            if None, assigns None to __end_time. Otherwise, if start_time is not None, stores the value provided,
-            but if start_time is None, throws an exception because ending before starting is weird.
-
-        Raises
-        ------
-        ValueError
-            if `start_time` is None and `end_time` isn't.
-        """
-
-        raise NotImplementedError
+    # #TODO Am I supposed to write an abstract __init__ method ? PyCharm tells me 'Parameters not used...'
+    # @abc.abstractmethod
+    # def __init__(self, start_time: Any, end_time: Any) -> None:
+    #
+    #     """
+    #     Parameters
+    #     ----------
+    #     start_time: Any
+    #         if None, starts the session, otherwise stores the value provided.
+    #     end_time: Any
+    #         if None, assigns None to __end_time. Otherwise, if start_time is not None, stores the value provided,
+    #         but if start_time is None, throws an exception because ending before starting is weird.
+    #
+    #     Raises
+    #     ------
+    #     ValueError
+    #         if `start_time` is None and `end_time` isn't.
+    #     """
+    #
+    #     raise NotImplementedError
 
     @abc.abstractmethod
     def start_session(self) -> None:
@@ -62,6 +66,7 @@ class AbstractWorkSession(abc.ABC):
         ------
         TypeError
             if this session was already ended
+        @TODO this should raise if it attempts to write an end time that's at or before the start time
 
         Returns
         -------
@@ -123,10 +128,11 @@ class AbstractWorkSession(abc.ABC):
     def total_time(self) -> int:
 
         """
+
         Returns
         -------
         int
-            total time spent working during this session in minutes if it's ended.
+            if the session is ended, returns total time spent working during this session in seconds.
         Raises
         ------
         TypeError
