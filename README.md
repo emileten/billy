@@ -1,8 +1,18 @@
-# work-tracker
+Sorry for the name ! 
 
-CLI interface to automate keeping track of work sessions and billing. 
+This is a massively over-engineered implementation of a simple task, meant to help me learn domain-driven design and python packaging. And other things. 
 
-Usage : 
+But it works and can be useful. 
+
+### Purpose 
+
+It's a CLI interface that allows you to 
+
+1. record start/end time of your work with around a click, instead of opening a csv and typing date-time.
+
+2. fits all that into a template bill with around a click, instead of manually filling yourself your file. 
+
+### Usage 
 
 
 1. Keeping track of work : when you start working, open a terminal window and start
@@ -11,8 +21,9 @@ recording your work session running `freebilly record-session`. See
 2. Billing : build whatever bill template you want (for example, a `.tex` file), and fill it with your work log information and other extra things by running `freebilly produce-bill`
 on your terminal. See `freebilly produce_bill --help` for more information. 
 
-Installation : 
+### Installation
 
+It's stored in the TestPyPi package repository, which doesn't have everything PyPi does. So make sure your environment has the dependencies 
+specified in `setup.cfg`. Then run : 
 
-
-
+`python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps freebilly`
