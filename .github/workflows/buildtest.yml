@@ -1,0 +1,26 @@
+name : build, test
+on:
+  push:
+    branches:
+    - "*"
+  pull_request:
+    branches: "main"
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+      - name: Install dependencies
+        run: |
+          pip install black
+      - name: Test code style
+        run: |
+          make format-check
+      - name: Build container
+        run: |
+          docker build . -t freebilly:dev-github-CI
+      - name: Test
+        run: |
+          docker run freebilly:dev pytest -v --pyargs freebilly
