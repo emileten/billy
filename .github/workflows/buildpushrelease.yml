@@ -23,6 +23,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Set image release tag
+        env:
+          FULL_RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          echo "docker_tag=${FULL_RELEASE_TAG#v}" >> $GITHUB_ENV
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -31,8 +36,10 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags:  ${{ secrets.DOCKER_HUB_USERNAME }}/freebilly:latest
+          tags:  ${{ secrets.DOCKER_HUB_USERNAME }}/freebilly:${{ env.docker_tag }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+
+
