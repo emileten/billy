@@ -24,7 +24,8 @@ class CsvWorkLogUnitOfWork(AbstractWorkLogUnitOfWork):
             newline="",
         ) as csv_file:
             work_log_writer = csv.DictWriter(
-                csv_file, fieldnames=self.work_logs.get_field_names(),
+                csv_file,
+                fieldnames=self.work_logs.get_field_names(),
             )
             work_log_writer.writeheader()
             for work_session in work_log.generate_work_sessions():

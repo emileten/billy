@@ -3,7 +3,14 @@ from click.testing import CliRunner
 import freebilly.endpoint.ClickEndPoint as ClickEndPoint
 
 # check that asking for help is helpful :)
-@pytest.mark.parametrize("subcmd", [None, "record-session", "produce-bill",])
+@pytest.mark.parametrize(
+    "subcmd",
+    [
+        None,
+        "record-session",
+        "produce-bill",
+    ],
+)
 def test_record_session_helpflags(subcmd):
 
     runner = CliRunner()

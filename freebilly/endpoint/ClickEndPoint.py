@@ -28,10 +28,14 @@ def freebilly_cli(debug):
     help="path to the folder where the work log is stored or is to be stored",
 )
 @click.option(
-    "--client", required=True, help="client with whom you're working",
+    "--client",
+    required=True,
+    help="client with whom you're working",
 )
 @click.option(
-    "--project", required=True, help="project on which you're working",
+    "--project",
+    required=True,
+    help="project on which you're working",
 )
 def record_session(path: str, client: str, project: str) -> None:
 
@@ -62,13 +66,19 @@ def record_session(path: str, client: str, project: str) -> None:
     except for the special cases 'hourly_rate', 'quantity' and 'total' for which data is to be inferred by the program.",
 )  # TODO instead, you should be able to pass only a yaml to this function from the CIL
 @click.option(
-    "--bill_output_path", required=True, help="path where to write the produced bill",
+    "--bill_output_path",
+    required=True,
+    help="path where to write the produced bill",
 )
 @click.option(
-    "--client", required=True, help="client with whom you're working",
+    "--client",
+    required=True,
+    help="client with whom you're working",
 )
 @click.option(
-    "--project", required=True, help="project on which you're working",
+    "--project",
+    required=True,
+    help="project on which you're working",
 )
 @click.option(
     "--start_time",
@@ -81,7 +91,9 @@ def record_session(path: str, client: str, project: str) -> None:
     help="end time of the period covered by the bill, in ISO8601 format",
 )
 @click.option(
-    "--hourly_rate", required=True, help="hourly rate",
+    "--hourly_rate",
+    required=True,
+    help="hourly rate",
 )
 def produce_bill(
     template_path: str,

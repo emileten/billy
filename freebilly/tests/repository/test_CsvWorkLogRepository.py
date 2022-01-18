@@ -83,9 +83,14 @@ def test_can_get_log_from_manually_written_csv():
             temp_fp.name, str(Path().joinpath(temp_folder_path, "work_log_A_1.csv"))
         )  # because no full name choice option
         with open(
-            str(Path().joinpath(temp_folder_path, "work_log_A_1.csv")), "w", newline="",
+            str(Path().joinpath(temp_folder_path, "work_log_A_1.csv")),
+            "w",
+            newline="",
         ) as csv_file:
-            my_writer = csv.DictWriter(csv_file, fieldnames=["start_time", "end_time"],)
+            my_writer = csv.DictWriter(
+                csv_file,
+                fieldnames=["start_time", "end_time"],
+            )
             my_writer.writeheader()
             my_writer.writerow(
                 {

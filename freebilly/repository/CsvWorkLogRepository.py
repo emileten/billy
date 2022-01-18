@@ -12,7 +12,7 @@ import pendulum as pdl  # TODO this is coupled with pendulum so PendulumWorkSess
 class CsvWorkLogRepository(AbstractWorkLogRepository):
 
     """
-    an instance of an AbstractWorkLogRepository where Csvs are used to store work logs in a folder. 
+    an instance of an AbstractWorkLogRepository where Csvs are used to store work logs in a folder.
     """
 
     __repository_path: Path
@@ -102,7 +102,8 @@ class CsvWorkLogRepository(AbstractWorkLogRepository):
         )  # TODO here is a coupling with OrderedSetWorkLog
         with open(csv_file_path, newline="") as csv_file:
             csv_reader = csv.DictReader(
-                csv_file, fieldnames=["start_time", "end_time"],
+                csv_file,
+                fieldnames=["start_time", "end_time"],
             )
             next(csv_reader)  # skip header
             for row in csv_reader:
