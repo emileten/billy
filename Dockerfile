@@ -11,7 +11,7 @@ RUN bash -c "python -m pip install pendulum black pytest pyyaml click ordered-se
 # then install your package from TestPyPi, without the dependencies because TestPyPi messes it up.
 RUN bash -c "python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps freebilly"
 
-# environment is almost set up.
+# environment is set up 
 
-# declare a command
-CMD ["freebilly", "--help"]
+# example of command declaration
+# CMD ["freebilly", "--help"]
