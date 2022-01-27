@@ -1,7 +1,7 @@
 FROM python:3.9-slim-buster
 
 # move to temporary packages
-WORKDIR /Users/emile/Documents/toy-infra
+WORKDIR /opt
 # create a virtual environment where to fit in the package and its dependencies
 RUN bash -c "python3 -m venv env"
 # activate
@@ -13,5 +13,5 @@ RUN bash -c "python3 -m pip install --index-url https://test.pypi.org/simple/ --
 
 # environment is set up 
 
-# example of command declaration
-# CMD ["freebilly", "--help"]
+# Dockerfile complains if there is no CMD or ENTRYPOINT
+CMD ["freebilly"]
