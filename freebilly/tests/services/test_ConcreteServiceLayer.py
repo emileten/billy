@@ -1,6 +1,8 @@
 from tempfile import TemporaryDirectory, NamedTemporaryFile
 from pathlib import Path
 import pendulum as pdl
+from pendulum.exceptions import ParserError
+import pytest
 from freebilly.repository.CsvWorkLogUnitOfWork import CsvWorkLogUnitOfWork
 from freebilly.repository.ConcreteBillUnitOfWork import ConcreteBillUnitOfWork
 from freebilly.services.ConcreteServiceLayer import ConcreteServiceLayer
@@ -32,6 +34,32 @@ def test_end_session():
         assert uow.work_logs.exists(client="A", project="1")
         assert uow.work_logs.valid(client="A", project="1")
         assert ongoing_session in uow.work_logs.get(client="A", project="1")
+
+
+def test_add_session():
+
+    s = "2000-01-01T00:00"
+    e = "2000-01-01T01:00"
+
+    with TemporaryDirectory() as fake_dir_path:  # TODO duplications. See above.
+        uow = CsvWorkLogUnitOfWork(Path(fake_dir_path))
+        with pytest.raises(ParserError):
+            ConcreteServiceLayer.add_session(
+                uow=uow,
+                client="A",
+                project="1",
+                start_time="BLABLA1",
+                end_time="BLABLA2",
+            )
+        ConcreteServiceLayer.add_session(
+            uow=uow, client="A", project="1", start_time=s, end_time=e
+        )
+        assert uow.work_logs.exists(client="A", project="1")
+        assert uow.work_logs.valid(client="A", project="1")
+
+        expected = PendulumWorkSession(start_time=pdl.parse(s), end_time=pdl.parse(e))
+
+        assert expected in uow.work_logs.get(client="A", project="1")
 
 
 def test_produce_bill():

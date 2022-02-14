@@ -62,6 +62,33 @@ class AbstractServiceLayer(
 
     @staticmethod
     @abc.abstractmethod
+    def add_session(
+        uow: AbstractWorkLogUnitOfWork,
+        client: str,
+        project: str,
+        start_time: str,
+        end_time: str,
+    ):
+
+        """
+
+        Commits a supplied, ended work session to some repository through a unit of work.
+
+        Parameters
+        ----------
+        uow: AbstractWorkLogUnitOfWork
+        client: str
+        project: str
+        start_time: str
+            ISO 8601 format.
+        end_time: str
+            ISO 8601 format.
+        """
+
+        raise NotImplementedError
+
+    @staticmethod
+    @abc.abstractmethod
     def produce_bill(
         uow: AbstractBillUnitOfWork,
         template_path: Path,

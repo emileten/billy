@@ -46,6 +46,41 @@ def record_session(path: str, client: str, project: str) -> None:
     ConcreteServiceLayer.end_session(uow, work_log, work_session)
 
 
+@freebilly_cli.command(help="record a work session in a log")
+@click.option(
+    "--path",
+    required=True,
+    help="path to the folder where the work log is stored or is to be stored",
+)
+@click.option(
+    "--client",
+    required=True,
+    help="client with whom you're working",
+)
+@click.option(
+    "--project",
+    required=True,
+    help="project on which you're working",
+)
+@click.option(
+    "--start_time",
+    required=True,
+    help="start time of the work session",
+)
+@click.option(
+    "--end_time",
+    required=True,
+    help="end time of the work session",
+)
+def supply_session(
+    path: str, client: str, project: str, start_time: str, end_time: str
+) -> None:
+
+    uow = CsvWorkLogUnitOfWork(Path(path))
+    logging.info("pushing supplied session to work log...")
+    ConcreteServiceLayer.add_session(uow, client, project, start_time, end_time)
+
+
 @freebilly_cli.command(help="produce a work bill")
 @click.option(
     "--template_path",
