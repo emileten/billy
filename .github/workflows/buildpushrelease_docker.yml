@@ -1,4 +1,4 @@
-name: build, push released
+name: build, push released on docker
 on:
   release:
     types: [published]
