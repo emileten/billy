@@ -1,7 +1,10 @@
 name: build, push released on test pypi
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+    - "*"
+  # release:
+  #   types: [published]
 jobs:
   build:
     runs-on: ubuntu-latest
