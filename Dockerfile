@@ -7,7 +7,7 @@ RUN bash -c "python3 -m venv env"
 # activate
 RUN bash -c "source env/bin/activate"
 # install dependencies first
-RUN bash -c "python -m pip install pendulum black pytest pyyaml click ordered-set custom_inherit"
+RUN bash -c "python -m pip install pendulum black pytest pyyaml click ordered-set custom_inherit rumps"
 # then install your package from TestPyPi, without the dependencies because TestPyPi messes it up.
 RUN bash -c "python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps freebilly"
 
