@@ -15,14 +15,21 @@ CLIENT = os.getenv("FREEBILLY_CLIENT")
 PROJECT = os.getenv("FREEBILLY_PROJECT")
 
 SHUT_DOWN_WHILE_SLEEPING = False
-POWER_MGMT_RE = re.compile(r'IOPowerManagement.*{(.*)}')
+POWER_MGMT_RE = re.compile(r"IOPowerManagement.*{(.*)}")
+
 
 def macbook_is_sleeping():
     output = subprocess.check_output(
-        'ioreg -w 0 -c IODisplayWrangler -r IODisplayWrangler'.split())
-    status = POWER_MGMT_RE.search(output.decode('utf-8')).group(1)
-    return dict((k[1:-1], v) for (k, v) in (x.split('=') for x in
-                                            status.split(',')))['DevicePowerState']!='4'
+        "ioreg -w 0 -c IODisplayWrangler -r IODisplayWrangler".split()
+    )
+    status = POWER_MGMT_RE.search(output.decode("utf-8")).group(1)
+    return (
+        dict((k[1:-1], v) for (k, v) in (x.split("=") for x in status.split(",")))[
+            "DevicePowerState"
+        ]
+        != "4"
+    )
+
 
 class FreeBillyRumpsApp(rumps.App):
     def __init__(self):
@@ -44,7 +51,11 @@ class FreeBillyRumpsApp(rumps.App):
             raise ValueError
 
     def _ongoing(self):
-        return self.uow is not None and self.work_log is not None and self.work_session is not None
+        return (
+            self.uow is not None
+            and self.work_log is not None
+            and self.work_session is not None
+        )
 
     @rumps.clicked("Start")
     def start(self, _):
@@ -81,13 +92,18 @@ class FreeBillyRumpsApp(rumps.App):
     @rumps.timer(5)
     def _check_status(self, _):
         if macbook_is_sleeping() and self._ongoing():
-            logger.info("macbook is sleeping, ending the session") # can't get notifs to work in a no clicked decorator function :/
-            Services.end_session(self.uow, self.work_log, self.work_session) # copy pasted that from above b/c doesn't work when externalized in a function.
+            logger.info(
+                "macbook is sleeping, ending the session"
+            )  # can't get notifs to work in a no clicked decorator function :/
+            Services.end_session(
+                self.uow, self.work_log, self.work_session
+            )  # copy pasted that from above b/c doesn't work when externalized in a function.
             self.uow, self.work_log, self.work_session = None, None, None
 
     # TODO figure out how to send a notif from a non click function.
     # TODO : a timer that catches work activity (e.g. opening slack...) and sends notif to offer start
     # TODO handle shut down as well to end session
+
 
 if __name__ == "__main__":
     app = FreeBillyRumpsApp()
